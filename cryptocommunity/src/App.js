@@ -15,7 +15,7 @@ function App() {
           <Route path={["/search", "/search/:title"]} exact={true}>
             <SearchScreen/>
           </Route>
-          <Route path="/details/:coinId/:currency" exact={true}>
+          <Route path="/details/:coinId/" exact={true}>
             <DetailsScreen/>
           </Route>
         </BrowserRouter>

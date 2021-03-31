@@ -10,16 +10,33 @@ const DetailsScreen = () => {
     findExchanceData()
   }, [])
   const findExchanceData = () => {
-    movieService.findDetailedExchangeData(coinId, currency)
+    movieService.findDetailedExchangeData(coinId)
     .then((results) => {
       setResults(results)
+      console.log(results)
     }, [])
   }
   return(
       <div>
         <button onClick={()=>{history.goBack()}}>Go Back</button>
         <br/>
-         1 {results.asset_id_base} is Worth: {results.rate} {results.asset_id_quote}
+        <p>
+         {results.asset_id}
+         <br/>
+         {results.name}
+          <br/>
+         {results.date_start}
+          <br/>
+        {results.date_end}
+          <br/>
+        {results.volume_1hrs_usd}
+          <br/>
+        {results.volume_1day_usd}
+          <br/>
+        {results.price_usd}
+          <br/>
+        {results.id_icon}
+        </p>
       </div>
   )
 }
