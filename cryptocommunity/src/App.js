@@ -4,6 +4,7 @@ import SearchScreen from "./components/search-screen";
 import DetailsScreen from "./components/details-screen";
 import HomeScreen from "./components/home-screen";
 import {BrowserRouter, Route} from "react-router-dom";
+import ExchangeRateScreen from "./components/exchange-rates-screen";
 
 function App() {
   return (
@@ -15,8 +16,11 @@ function App() {
           <Route path={["/search", "/search/:title"]} exact={true}>
             <SearchScreen/>
           </Route>
-          <Route path="/details/:coinId/" exact={true}>
+          <Route path={["/details/:coinId", "/details/:coinId/:currencyId"]} exact={true}>
             <DetailsScreen/>
+          </Route>
+          <Route path="/exchangerate/:coinId/:currencyId" exact={true}>
+            <ExchangeRateScreen/>
           </Route>
         </BrowserRouter>
       </div>
