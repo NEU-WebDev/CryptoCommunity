@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from "react-router-dom";
 import "../index.css";
 import "../styles/home-page.css";
+import NavBar from "./navbar";
 
 const HomeScreen = () => {
   return(
@@ -11,14 +12,7 @@ const HomeScreen = () => {
             <h1>CryptoCommunity</h1>
             <h4>Creating Community Around Crypto Currency</h4>
           </div>
-          <div class="cryptocommunity-navbar-primary">
-            <nav className="navbar navbar-expand-xl navbar-dark bg-dark">
-              <Link to="/" className="navbar-brand">Home</Link>
-              <Link to="/search" className="navbar-brand">Search</Link>
-              <Link to="/Sign-In" className="navbar-brand">Sign-In</Link>
-              <Link to="/register" className="navbar-brand">Sign-Up</Link>
-            </nav>
-          </div>
+          <NavBar/>
           <div class="default-banner">
             <img class="img-fluid" alt="Responsive image" src="https://www.freewebheaders.com/wp-content/gallery/high-tech-designs/innovative-systems-and-hi-tech-engineering-solutions-web-header.jpg"/>
           </div>
