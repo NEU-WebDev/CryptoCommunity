@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import userService from '../../services/user-service'
+import NavBar from "../navbar";
 
 const Profile = () => {
   const [currentUser, setCurrentUser] = useState({username: '', password: ''})
@@ -12,10 +13,12 @@ const Profile = () => {
   }, [])
   const history = useHistory()
   const logout = () => {
+    userService.logout();
     history.push("/")
   }
   return(
       <div>
+        <NavBar/>
         <h1>Profile</h1>
         {JSON.stringify(currentUser)}
         <h3>Welcome {currentUser.username}</h3>

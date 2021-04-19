@@ -1,4 +1,4 @@
-const USER_API = "http://localhost:3000/api/users";
+const USER_API = "http://localhost:8080/api/users";
 
 const profile = () => {
   return fetch(`${USER_API}/profile`, {
@@ -32,7 +32,12 @@ const register = (credentials) => {
   .then(response => response.json())
 }
 
-const logout = () => {}
+const logout = () => {
+  return fetch(`${USER_API}/logout`, {
+    method: "POST",
+    credentials: "include"
+  }).then(response => response.json())
+}
 
 export default {
   register, login, logout, profile
