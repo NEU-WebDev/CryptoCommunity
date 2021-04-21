@@ -5,6 +5,7 @@ import NavBar from "../navbar";
 
 const Profile = () => {
   const [currentUser, setCurrentUser] = useState({username: '', password: ''})
+  const [updatedUserName, setUpdatedUserName] = useState({username: ''})
   useEffect(() => {
     userService.profile()
     .then((currentUser) => {
@@ -16,12 +17,34 @@ const Profile = () => {
     userService.logout();
     history.push("/")
   }
+
+  const updateUserName = () => {
+    const newUser = {
+      ...currentUser,
+      username: updatedUserName
+    }
+    userService.updateUserName(newUser)
+    userService.logout();
+    history.push("/")
+  }
+
   return(
       <div>
         <NavBar/>
         <h1>Profile</h1>
         {JSON.stringify(currentUser)}
         <h3>Welcome {currentUser.username}</h3>
+        <p>Change Your UserName:</p>
+        <p>*You'll need to login again after changing your username*</p>
+        <input
+            placeholder={currentUser.username}
+            onChange={(event) => setUpdatedUserName(event.target.value)}/>
+        <button
+            onClick={updateUserName}
+            className="btn btn-primary">
+          Update
+        </button>
+        <br/>
         <button
             onClick={logout}
             className="btn btn-primary">

@@ -39,6 +39,18 @@ const logout = () => {
   }).then(response => response.json())
 }
 
+const updateUserName = (newUser) => {
+  return fetch(`${USER_API}/users`, {
+    method: "PUT",
+    body: JSON.stringify(newUser),
+    credentials: 'include',
+    headers: {
+      'content-type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+}
+
 export default {
-  register, login, logout, profile
+  register, login, logout, profile, updateUserName
 }

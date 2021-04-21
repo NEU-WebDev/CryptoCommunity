@@ -12,7 +12,6 @@ const Login = () => {
   const login = () => {
     userService.login(credentials)
     .then((user) => {
-      console.log(user)
       if(user === 0) {
         alert("login failed, try again")
       } else {

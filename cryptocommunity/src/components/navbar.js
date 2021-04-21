@@ -11,7 +11,7 @@ const NavBar = () => {
           <Link to="/profile" className="navbar-brand">Profile</Link>
           <Link to="/login" className="navbar-brand">Login</Link>
           <Link to="/register" className="navbar-brand">Register</Link>
-          <Link to="/privacy" className="navbar-brand">Privacy Policy</Link>
+          <a href="https://www.privacypolicies.com/live/a9ccc0fc-fdec-4404-a260-4f009950b239" className="navbar-brand">Privacy Policy</a>
         </nav>
       </div>
   )
