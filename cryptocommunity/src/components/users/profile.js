@@ -34,10 +34,13 @@ const Profile = () => {
         <h1>Profile</h1>
         {JSON.stringify(currentUser)}
         <h3>Welcome {currentUser.username}</h3>
-        <p>Change Your UserName:</p>
-        <p>*You'll need to login again after changing your username*</p>
+        <p>Change Your Username & Password:</p>
+        <p>*You'll need to login again after changing your username or password*</p>
         <input
-            placeholder={currentUser.username}
+            placeholder="New Username"
+            onChange={(event) => setUpdatedUserName(event.target.value)}/>
+        <input
+            placeholder="New Password"
             onChange={(event) => setUpdatedUserName(event.target.value)}/>
         <button
             onClick={updateUserName}
@@ -47,7 +50,7 @@ const Profile = () => {
         <br/>
         <button
             onClick={logout}
-            className="btn btn-primary">
+            className="btn btn-danger">
           Logout
         </button>
       </div>

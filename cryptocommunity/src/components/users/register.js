@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import userService from '../../services/user-service'
+import "../../styles/register-page.css";
 import NavBar from "../navbar";
 
 const Register = () => {
@@ -20,7 +21,10 @@ const Register = () => {
   return(
       <div>
         <NavBar/>
+        <div className="register-header">
         <h1>Register</h1>
+          <p>All new accounts agree to the Terms and Conditons. Accounts and posts may be removed by moderators at any time</p>
+        </div>
         <input
             value={credentials.username}
             onChange={(e) => {setCredentials({...credentials, username: e.target.value})}}
