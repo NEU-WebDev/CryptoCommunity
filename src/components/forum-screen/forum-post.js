@@ -2,13 +2,13 @@ import React, {useState, useEffect} from 'react'
 import {Link} from "react-router-dom";
 import NavBar from "../navbar.js";
 import postService from "../../services/post-service"
+import commentService from "../../services/comment-service";
 import userService from "../../services/user-service";
 
-const ForumScreen = () => {
+const ForumPost = () => {
   const [currentUser, setCurrentUser] = useState({username: '', password: ''})
-  const [recentPosts, setRecentPosts] = useState({recentPosts: []})
-  const [newPost, setNewPost] = useState({body: ""})
-  const [newTitle, setNewTitle] = useState({title: ""})
+  const [commentsForPost, setCommentsForPost] = useState({})
+  const [newComment, setNewComment] = useState({})
 
   useEffect(() => {
     userService.profile()
@@ -17,14 +17,14 @@ const ForumScreen = () => {
     })
   }, [])
 
-  const createPost = () => {
-    postService.createPostForUser(currentUser.username, newPost)
+  const createComment = () => {
+    commentService.createCommentForPost(currentUser, newComment)
   }
 
-  const findRecentPosts = () => {
-    postService.findRecentPosts()
+  const findComments = () => {
+    commentService.findCommentsForPost()
     .then((Results) => {
-      setRecentPosts(Results);
+      setCommentsForPost(Results);
     }, [])
   }
 
@@ -53,26 +53,17 @@ const ForumScreen = () => {
             </ul>
           </div>
           <div className="form-group">
-            <label htmlFor="titleInput">Title:</label>
+            <label htmlFor="commentInput">Comment:</label>
             <textarea
-                onChange={(event) => setNewTitle(event.target.value)}
+                onChange={(event) => setNewComment(event.target.value)}
                 className="form-control"
-                id="titleInput"
-                rows="1">
-            </textarea>
-          </div>
-          <div className="form-group">
-            <label htmlFor="bodyInput">Body:</label>
-            <textarea
-                onChange={(event) => setNewPost(event.target.value)}
-                className="form-control"
-                id="bodyInput"
-                rows="3"></textarea>
+                id="commentInput"
+                rows="2"></textarea>
           </div>
           <button
-              onClick={createPost}
+              onClick={createComment}
               className="btn btn-success">
-            Create Post
+            Post Comment
           </button>
           <div className="footer">
             <a href="https://www.privacypolicies.com/live/a9ccc0fc-fdec-4404-a260-4f009950b239">Privacy Policy</a>
@@ -84,4 +75,4 @@ const ForumScreen = () => {
   )
 }
 
-export default ForumScreen;
+export default ForumPost;
