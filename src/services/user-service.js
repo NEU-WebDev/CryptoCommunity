@@ -1,7 +1,8 @@
-const USER_API = "http://localhost:8080/api/users";
+const USER_API = "https://pure-shore-12573.herokuapp.com/api/users";
+const REMOTE_API = "http://localhost:8080/api/users";
 
 const profile = () => {
-  return fetch(`${USER_API}/profile`, {
+  return fetch(`${REMOTE_API}/profile`, {
     method: "POST",
     credentials: "include"
   }).then(response => response.json())
@@ -9,7 +10,7 @@ const profile = () => {
 
 
 const login = (credentials) => {
-  return fetch(`${USER_API}/login`, {
+  return fetch(`${REMOTE_API}/login`, {
     method: "POST",
     credentials: "include",
     body: JSON.stringify(credentials),
@@ -21,7 +22,7 @@ const login = (credentials) => {
 }
 
 const register = (credentials) => {
-  return fetch(`${USER_API}/register`, {
+  return fetch(`${REMOTE_API}/register`, {
     method: "POST",
     credentials: "include",
     body: JSON.stringify(credentials),
@@ -33,14 +34,15 @@ const register = (credentials) => {
 }
 
 const logout = () => {
-  return fetch(`${USER_API}/logout`, {
+  return fetch(`${REMOTE_API}/logout`, {
     method: "POST",
     credentials: "include"
   }).then(response => response.json())
 }
 
-const updateUserName = (newUser) => {
-  return fetch(`${USER_API}/users`, {
+const updateUserName = (userName, newUser) => {
+  console.log("MAde it here")
+  return fetch(`${REMOTE_API}/update/${userName}`, {
     method: "PUT",
     body: JSON.stringify(newUser),
     credentials: 'include',
