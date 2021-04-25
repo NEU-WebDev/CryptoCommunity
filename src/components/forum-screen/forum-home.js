@@ -3,10 +3,11 @@ import {Link} from "react-router-dom";
 import NavBar from "../navbar.js";
 import postService from "../../services/post-service"
 import userService from "../../services/user-service";
+import "../../styles/forum-page.css"
 
 const ForumScreen = () => {
   const [currentUser, setCurrentUser] = useState({username: '', password: ''})
-  const [recentPosts, setRecentPosts] = useState({recentPosts: []})
+  const [recentPost, setRecentPost] = useState([])
   const [newPost, setNewPost] = useState({body: ""})
   const [newTitle, setNewTitle] = useState({title: ""})
 
@@ -15,6 +16,7 @@ const ForumScreen = () => {
     .then((currentUser) => {
       setCurrentUser(currentUser)
     })
+    findRecentPosts()
   }, [])
 
   const createPost = () => {
@@ -24,8 +26,8 @@ const ForumScreen = () => {
   const findRecentPosts = () => {
     postService.findRecentPosts()
     .then((Results) => {
-      setRecentPosts(Results);
-    }, [])
+      setRecentPost(Results);
+    })
   }
 
   return(
@@ -36,22 +38,23 @@ const ForumScreen = () => {
             <h4>Engage in Conversation and Learn More About Crypto</h4>
           </div>
           <NavBar/>
-          <h1>PLACEHOLDER: POST DISPLAYED HERE</h1>
+          <h4>Recent Posts</h4>
           <div className="recent-posts">
             <ul className="list-group">
-              {/*{*/}
-              {/*  recentPosts.map((post) => {*/}
-              {/*    return(*/}
-              {/*        <li className="list-group-item">*/}
-              {/*          {post.title}*/}
-              {/*          {post.body}*/}
-              {/*          {post.author}*/}
-              {/*        </li>*/}
-              {/*    )*/}
-              {/*  })*/}
-              {/*}*/}
+              {
+                recentPost.map((post) => {
+                  return(
+                    <li className="list-group-item-post">
+                      {post.title}
+                      {post.body}
+                      {post.author}
+                    </li>
+                  )
+                })
+              }
             </ul>
           </div>
+          <h4>Create a New Post</h4>
           <div className="form-group">
             <label htmlFor="titleInput">Title:</label>
             <textarea

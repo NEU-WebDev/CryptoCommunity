@@ -4,7 +4,7 @@ const REMOTE_API = "http://localhost:8080/api";
 export const createPostForUser = (userId, newPost) =>
     fetch(`${REMOTE_API}/users/${userId}/posts`, {
       method: "POST",
-      body: JSON.stringify(newPost),
+      body: newPost,
       headers: {
         'content-type': 'application/json'
       }
@@ -29,11 +29,15 @@ export const deletePost = (postId) =>
     .then(response => response.json())
 
 export const findPostsForUser = (userId) =>
-    fetch(`${REMOTE_API}/${userId}/posts/`)
+    fetch(`${REMOTE_API}/users/${userId}/userPosts/`, {
+      method: "GET"
+    })
     .then(response => response.json())
 
 export const findRecentPosts = () =>
-    fetch(`${REMOTE_API}/posts`)
+    fetch(`${REMOTE_API}/posts`,{
+      method: "GET"
+    })
     .then(response => response.json())
 
 export default {
