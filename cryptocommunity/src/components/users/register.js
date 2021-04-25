@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import userService from '../../services/user-service'
 import NavBar from "../navbar";
+import "../../styles/register-page.css";
 
 const Register = () => {
   const [credentials, setCredentials] = useState({username: '', password: ''})
@@ -20,26 +21,27 @@ const Register = () => {
   return(
       <div>
         <NavBar/>
-        <h1>Register</h1>
+        <div className="register-header">
+          <h1>Register</h1>
+          Already have an account? <Link className="login-link" to="/login">
+          Login Here
+        </Link>
+        </div>
         <input
             value={credentials.username}
             onChange={(e) => {setCredentials({...credentials, username: e.target.value})}}
             className="form-control"
-            placeholder="username"/>
+            placeholder="Username"/>
         <input
             value={credentials.password}
             onChange={(e) => {setCredentials({...credentials, password: e.target.value})}}
             className="form-control"
-            placeholder="password"/>
-        <input
-            className="form-control"
-            placeholder="validate password"/>
+            placeholder="Password"/>
+        <nav className="navbar navbar-dark bg-dark">
         <button onClick={register} className="btn btn-primary">
           Register
         </button>
-        <Link to="/login">
-          Login
-        </Link>
+        </nav>
       </div>
   )
 }

@@ -3,7 +3,6 @@ import {Link, useHistory} from 'react-router-dom'
 import userService from '../../services/user-service'
 import "../../styles/login-page.css";
 import NavBar from "../navbar";
-// import "../../styles/home-page.css";
 
 
 const Login = () => {

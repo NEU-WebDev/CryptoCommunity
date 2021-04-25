@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react'
-import {useHistory} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import userService from '../../services/user-service'
 import NavBar from "../navbar";
+import "../../styles/profile-page.css";
 
 const Profile = () => {
   const [currentUser, setCurrentUser] = useState({username: '', password: ''})
@@ -19,14 +20,17 @@ const Profile = () => {
   return(
       <div>
         <NavBar/>
-        <h1>Profile</h1>
-        {JSON.stringify(currentUser)}
-        <h3>Welcome {currentUser.username}</h3>
+        <div className="profile-header">
+          <h1>Profile</h1>
+          Hello {currentUser.username}
+        </div>
+        <nav className="navbar navbar-dark bg-dark">
         <button
             onClick={logout}
             className="btn btn-primary">
           Logout
         </button>
+        </nav>
       </div>
   )
 }
