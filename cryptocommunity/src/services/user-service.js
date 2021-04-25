@@ -8,6 +8,11 @@ const profile = () => {
   }).then(response => response.json())
 }
 
+const findProfile = (profileId) => {
+  return fetch(`${REMOTE_API}/profile/${profileId}`, {
+    method: "POST",
+  }).then(response => response.json())
+}
 
 const login = (credentials) => {
   return fetch(`${REMOTE_API}/login`, {

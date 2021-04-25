@@ -32,9 +32,10 @@ const Profile = () => {
   return(
       <div>
         <NavBar/>
-        <h1>Profile</h1>
-        {JSON.stringify(currentUser)}
-        <h3>Welcome {currentUser.username}</h3>
+        <div className="register-header">
+          <h1>Profile</h1>
+          <h4>Welcome {currentUser.username}</h4>
+        </div>
         <p>Change Your Username & Password:</p>
         <p>*You'll need to login again after changing your username or password*</p>
         <input
