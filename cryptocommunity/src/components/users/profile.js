@@ -6,6 +6,7 @@ import "../../styles/profile-page.css";
 
 const Profile = () => {
   const [currentUser, setCurrentUser] = useState({username: '', password: ''})
+  const [updatedUserName, setUpdatedUserName] = useState({username: ''})
   useEffect(() => {
     userService.profile()
     .then((currentUser) => {
@@ -17,20 +18,42 @@ const Profile = () => {
     userService.logout();
     history.push("/")
   }
+
+  const updateUserName = () => {
+    const newUser = {
+      ...currentUser,
+      username: updatedUserName
+    }
+    userService.updateUserName(newUser)
+    userService.logout();
+    history.push("/")
+  }
+
   return(
       <div>
         <NavBar/>
-        <div className="profile-header">
-          <h1>Profile</h1>
-          Hello {currentUser.username}
-        </div>
-        <nav className="navbar navbar-dark bg-dark">
+        <h1>Profile</h1>
+        {JSON.stringify(currentUser)}
+        <h3>Welcome {currentUser.username}</h3>
+        <p>Change Your Username & Password:</p>
+        <p>*You'll need to login again after changing your username or password*</p>
+        <input
+            placeholder="New Username"
+            onChange={(event) => setUpdatedUserName(event.target.value)}/>
+        <input
+            placeholder="New Password"
+            onChange={(event) => setUpdatedUserName(event.target.value)}/>
+        <button
+            onClick={updateUserName}
+            className="btn btn-primary">
+          Update
+        </button>
+        <br/>
         <button
             onClick={logout}
-            className="btn btn-primary">
+            className="btn btn-danger">
           Logout
         </button>
-        </nav>
       </div>
   )
 }

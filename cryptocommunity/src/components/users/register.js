@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import userService from '../../services/user-service'
+import "../../styles/register-page.css";
 import NavBar from "../navbar";
 import "../../styles/register-page.css";
 
@@ -26,6 +27,7 @@ const Register = () => {
           Already have an account? <Link className="login-link" to="/login">
           Login Here
         </Link>
+          <p>All new accounts agree to the Terms and Conditons. Accounts and posts may be removed by moderators at any time</p>
         </div>
         <input
             value={credentials.username}

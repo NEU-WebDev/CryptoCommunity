@@ -8,6 +8,7 @@ import ExchangeRateScreen from "./components/exchange-rates-screen";
 import Login from "./components/users/login";
 import Register from "./components/users/register";
 import Profile from "./components/users/profile";
+import ForumScreen from "./components/forum-screen/forum-home"
 
 function App() {
   return (
@@ -33,6 +34,9 @@ function App() {
           </Route>
           <Route path="/exchangerate/:coinId/:currencyId" exact={true}>
             <ExchangeRateScreen/>
+          </Route>
+          <Route path="/forum" exact={true}>
+            <ForumScreen/>
           </Route>
         </BrowserRouter>
       </div>

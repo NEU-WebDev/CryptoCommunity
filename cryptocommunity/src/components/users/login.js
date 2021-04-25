@@ -11,14 +11,12 @@ const Login = () => {
   const login = () => {
     userService.login(credentials)
     .then((user) => {
-      console.log(user)
       if(user === 0) {
         alert("login failed, try again")
       } else {
         history.push("/profile")
       }
     })
-    history.push("/profile")
   }
 
   return(
@@ -31,12 +29,12 @@ const Login = () => {
         </Link>
         </div>
         <input
-            value={credentials.username}
+            placeholder={credentials.username}
             onChange={(e) => {setCredentials({...credentials, username: e.target.value})}}
             className="form-control"
             placeholder="Username"/>
         <input
-            value={credentials.password}
+            placeholder={credentials.password}
             onChange={(e) => {setCredentials({...credentials, password: e.target.value})}}
             className="form-control"
             placeholder="Password"/>
@@ -46,6 +44,11 @@ const Login = () => {
             className="btn btn-primary">
           Login
         </button>
+          <button
+              onClick={login}
+              className="btn btn-primary">
+            Administrator Login
+          </button>
         </nav>
       </div>
   )
