@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import {Link, useHistory, useParams} from "react-router-dom";
 import movieService from "../services/coin-exchange-service"
+import NavBar from "../components/navbar"
+import "../index.css";
 import "../styles/details-page.css"
 
 const ExchangeRateScreen = () => {
@@ -31,21 +33,17 @@ const ExchangeRateScreen = () => {
 
   return(
       <div>
-        <div className="cryptocommunity-navbar-primary">
-          <nav className="navbar navbar-expand-xl navbar-dark bg-dark">
-            <Link to="/" className="navbar-brand">Home</Link>
-            <Link to="/search" className="navbar-brand">Search</Link>
-            <Link to="/details" className="navbar-brand">Details</Link>
-            <Link to="/Sign-In" className="navbar-brand">Sign-In</Link>
-            <Link to="/register" className="navbar-brand">Sign-Up</Link>
-            <Link to="/privacy" className="navbar-brand">Privacy Policy</Link>
-          </nav>
-        </div>
+       <NavBar/>
         <div className="details-welcome">
           <h1>Current Exchange Rates Page</h1>
           <h6>Here are the detailed exchange rates of the currencies you requested</h6>
         </div>
-        <i className="fas fa-cog" onClick={()=>{history.goBack()}}>Back</i>
+        <div className="tool-tip nav-buttons">
+          <i className="fas fa-2x fa-arrow-circle-left" onClick={() => {
+            history.goBack()
+          }}></i>
+          <span className="tool-tip-text">Go Back</span>
+        </div>
         <br/>
         <ul className="list-group">
           <li className="list-group-item">
@@ -61,6 +59,7 @@ const ExchangeRateScreen = () => {
             Valid On: <b>{results.time}</b>
           </li>
         </ul>
+        <br/>
         <div className="footer">
           <a href="https://www.privacypolicies.com/live/a9ccc0fc-fdec-4404-a260-4f009950b239">Privacy Policy</a>
           <p>Vincent Luo & Richard A. Castaneda <br/>

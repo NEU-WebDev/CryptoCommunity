@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {Link, useHistory, useParams} from "react-router-dom";
 import movieService from "../services/coin-exchange-service"
+import "../index.css";
 import "../styles/details-page.css"
 import NavBar from "./navbar";
 import coinService from "../services/coin-service";
@@ -56,8 +57,17 @@ const DetailsScreen = () => {
             <h1>Detailed Currency Page</h1>
             <h6>The information on this page is current as of {date.toDateString()} {date.toTimeString()}</h6>
           </div>
-        <button className="fas fa-cog" onClick={()=>{history.goBack()}}>Back</button>
-        <button className="fas fa-cog float-right" onClick={()=>{addCoinToUser()}}>Add This Coin To My Profile</button>
+        <div class="tool-tip nav-buttons">
+          <i className="fas fa-2x fa-arrow-circle-left" onClick={()=>{history.goBack()}}></i>
+          <span class="tool-tip-text">Go Back</span>
+        </div>
+        <div className="tool-tip float-right nav-button">
+          <i value="Add to My Coins" className="fas fa-2x fa-check float-right"
+             onClick={() => {
+               addCoinToUser()
+             }}></i>
+          <span className="tool-tip-text">Add To My Coins</span>
+        </div>
         <br/>
         <ul className="list-group">
           <li className="list-group-item">
@@ -82,13 +92,14 @@ const DetailsScreen = () => {
             1 Day Volume (USD): <b>{results.volume_1day_usd}</b>
           </li>
         </ul>
+        <br/>
         <div className="users-who-own-coin">
           <h3 className="section-heading">Users Who Own This Coin</h3>
             {
               usersForCoin.map((user) => {
                 return(
                     <li className="list-group-item-post">
-                      <Link to={`/profile/${user.userId}`} className="navbar-brand">{user.userId}</Link>
+                      <Link to={`/profile/${user.userId}`} className="section-heading">{user.userId}</Link>
                     </li>
                 )
               })

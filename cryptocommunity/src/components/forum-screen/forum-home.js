@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import {Link} from "react-router-dom";
 import NavBar from "../navbar.js";
-import postService from "../../services/post-service"
+import postService from "../../services/post-service";
 import userService from "../../services/user-service";
+import "../../index.css";
 
 const ForumScreen = () => {
 
@@ -47,10 +48,9 @@ const ForumScreen = () => {
               {
                 recentPosts.map((post) => {
                   return(
-                      <li className="list-group-item-post">
+                      <li className="list-group-item post-item">
                         <Link to={`/forum/post/${post.id}`} className="navbar-brand">{post.title}</Link>
-                        By:
-                        {post.author}
+                        By: <Link to={`/profile/${post.author}`} className="navbar-brand">{post.author}</Link>
                       </li>
                   )
                 })

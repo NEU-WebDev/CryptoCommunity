@@ -10,11 +10,12 @@
 
 .container-fluid{
   background-color: slategray;
-  padding-left: 0px;
-  padding-right: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .recent-posts {
+  padding: 15px;
   font-family: "Copperplate", Fantasy;
   color: aliceblue;
 }

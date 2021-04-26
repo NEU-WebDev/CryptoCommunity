@@ -5,6 +5,7 @@ import postService from '../../services/post-service'
 import commentService from '../../services/comment-service'
 import coinService from '../../services/coin-service'
 import NavBar from "../navbar";
+import "../../index.css";
 import "../../styles/profile-page.css";
 
 const Profile = () => {
@@ -78,52 +79,58 @@ const Profile = () => {
             className="btn btn-primary">
           Update
         </button>
+        <button
+            onClick={logout}
+            className="btn btn-danger float-right">
+          Logout
+        </button>
         <br/>
         <div className="profile-user-posts">
           <h4>My Posts:</h4>
+          <ul className="list-group">
         {
           postsForUser.map((post) => {
             return(
-                <li className="list-group-item-post">
+                <li className="list-group-item post-item">
                   <Link to={`/forum/post/${post.id}`} className="navbar-brand">{post.title}</Link>
                 </li>
             )
           })
         }
+        </ul>
         </div>
         <br/>
         <div className="profile-user-comments">
           <h4>My Comments:</h4>
+          <ul className="list-group">
           {
             commentsForUser.map((comment) => {
               return(
-                  <li className="list-group-item-post">
+                  <li className="list-group-item post-item">
                     <Link to={`/forum/post/${comment.associatedPost}`} className="navbar-brand">{comment.body}</Link>
                   </li>
               )
             })
           }
+        </ul>
         </div>
+        <br/>
         <div className="profile-user-coins">
           <h4>My Coins:</h4>
+          <ul className="list-group">
           {
             coinsForUser.map((coin) => {
               return(
-                  <li className="list-group-item-post">
+                  <li className="list-group-item post-item">
                     <Link to={`/details/${coin.coinName}`} className="navbar-brand">{coin.coinName}</Link>
                   </li>
               )
             })
           }
+          </ul>
         </div>
-
+        <br/>
         <div className="profile-user-comments"></div>
-        <button
-            onClick={logout}
-            className="btn btn-danger">
-          Logout
-        </button>
-
         <div className="footer">
           <a href="https://www.privacypolicies.com/live/a9ccc0fc-fdec-4404-a260-4f009950b239">Privacy Policy</a>
           <p>Vincent Luo & Richard A. Castaneda <br/>

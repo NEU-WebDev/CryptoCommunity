@@ -31,8 +31,8 @@ const HomeScreen = () => {
 
   return(
       <>
-        <div class="container-fluid">
-          <div class="cryptocommunity-header">
+        <div className="container-fluid">
+          <div className="cryptocommunity-header">
             <h1>CryptoCommunity</h1>
             <h4>Creating Community Around Crypto Currency</h4>
           </div>
