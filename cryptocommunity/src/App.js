@@ -39,7 +39,7 @@ function App() {
           <Route path="/forum" exact={true}>
             <ForumScreen/>
           </Route>
-          <Route path="/forum/post/{postId}" exact={true}>
+          <Route path="/forum/post/:postId" exact={true}>
             <ForumPost/>
           </Route>
         </BrowserRouter>

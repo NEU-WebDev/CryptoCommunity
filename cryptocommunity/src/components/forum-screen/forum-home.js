@@ -12,7 +12,8 @@ const ForumScreen = () => {
 
   const [currentUser, setCurrentUser] = useState({username: '', password: ''})
   const [recentPosts, setRecentPosts] = useState([])
-  const [newPost, setNewPost] = useState({body: "", title: ""})
+  const [newPost, setNewPost] = useState({body: '', title: ''})
+  const [newTitle, setNewTitle] = useState({title:""})
 
   useEffect(() => {
     userService.profile()
@@ -23,6 +24,7 @@ const ForumScreen = () => {
 
   const createPost = () => {
     postService.createPostForUser(currentUser.username, newPost)
+    console.log(newPost)
   }
 
   const findRecentPosts = () => {
@@ -47,7 +49,7 @@ const ForumScreen = () => {
                   return(
                       <li className="list-group-item-post">
                         <Link to={`/forum/post/${post.id}`} className="navbar-brand">{post.title}</Link>
-                        {post.body}
+                        By:
                         {post.author}
                       </li>
                   )
@@ -58,7 +60,7 @@ const ForumScreen = () => {
           <div className="form-group">
             <label htmlFor="titleInput">Title:</label>
             <textarea
-                onChange={(event) => setNewPost({title: event.target.value})}
+                onChange={(event) => setNewTitle(event.target.value)}
                 className="form-control"
                 id="titleInput"
                 rows="1">
@@ -67,7 +69,7 @@ const ForumScreen = () => {
           <div className="form-group">
             <label htmlFor="bodyInput">Body:</label>
             <textarea
-                onChange={(event) => setNewPost({body: event.target.value})}
+                onChange={(event) => setNewPost({body: event.target.value, title: newTitle})}
                 className="form-control"
                 id="bodyInput"
                 rows="3"></textarea>

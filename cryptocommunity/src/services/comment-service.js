@@ -1,8 +1,8 @@
 const USER_API = "https://pure-shore-12573.herokuapp.com/api/users";
 const REMOTE_API = "http://localhost:8080/api";
 
-export const createCommentForPost = (postId, newComment) =>
-    fetch(`${REMOTE_API}/posts/${postId}/comments`, {
+export const createCommentForPost = (postId, newComment, username) =>
+    fetch(`${REMOTE_API}/posts/${postId}/newComment/${username}`, {
       method: "POST",
       body: JSON.stringify(newComment),
       headers: {
@@ -13,7 +13,7 @@ export const createCommentForPost = (postId, newComment) =>
 
 
 export const deleteComment = (commentId) =>
-    fetch(`${REMOTE_API}/comments/${commentId}/delete`, {
+    fetch(`${REMOTE_API}/posts/comments/${commentId}/delete`, {
       method: "DELETE"
     })
     .then(response => response.json())

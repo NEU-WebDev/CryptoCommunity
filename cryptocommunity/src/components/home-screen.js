@@ -1,10 +1,34 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {Link} from "react-router-dom";
 import "../index.css";
 import "../styles/home-page.css";
 import NavBar from "./navbar";
+import postService from "../services/post-service";
+import userService from "../services/user-service";
 
 const HomeScreen = () => {
+
+  const [recentPosts, setRecentPosts] = useState([])
+  const [currentUser, setCurrentUser] = useState({username: '', password: ''})
+
+  useEffect(() => {
+    findRecentPosts()
+  }, [])
+
+  useEffect(() => {
+    userService.profile()
+    .then((currentUser) => {
+      setCurrentUser(currentUser)
+    })
+  }, [])
+
+  const findRecentPosts = () => {
+    postService.findRecentPosts()
+    .then((Results) => {
+      setRecentPosts(Results);
+    }, [])
+  }
+
   return(
       <>
         <div class="container-fluid">
@@ -14,14 +38,23 @@ const HomeScreen = () => {
           </div>
           <NavBar/>
           <div class="default-banner">
-            <img class="img-fluid" alt="Responsive image" src="https://www.freewebheaders.com/wp-content/gallery/high-tech-designs/innovative-systems-and-hi-tech-engineering-solutions-web-header.jpg"/>
+            <img class="img-fluid" alt="Responsive image" src="https://mylightshine.com/wp-content/uploads/2021/04/innovative-systems-and-hi-tech-engineering-solutions-web-header.jpg"/>
           </div>
           <div className="recent-posts">
-          <span><h6>Recent Posts & Articles</h6>
-            <p>Recent Post 1</p>
-            <p>Recent Post 2</p>
-            <p>Recent Post 3</p>
-          </span>
+         <h6>Recent Posts & Articles</h6>
+            <ul className="list-group">
+            {
+              recentPosts.map((post) => {
+                return(
+                    <li className="list-group-item-post">
+                      <Link to={`/forum/post/${post.id}`} className="navbar-brand">{post.title}</Link>
+                      By:
+                      {post.author}
+                    </li>
+                )
+              })
+            }
+            </ul>
           </div>
           <div className="footer">
             <a href="https://www.privacypolicies.com/live/a9ccc0fc-fdec-4404-a260-4f009950b239">Privacy Policy</a>

@@ -11,6 +11,7 @@ const ForumPost = () => {
   const [commentsForPost, setCommentsForPost] = useState([])
   const [newComment, setNewComment] = useState([])
   const [currentPost, setCurrentPost] = useState([])
+  let buttonClicks = 0;
 
   useEffect(() => {
     userService.profile()
@@ -19,10 +20,9 @@ const ForumPost = () => {
     })
     retrievePost()
     findComments()
-  }, [])
+  }, [buttonClicks])
 
   const retrievePost = () => {
-    console.log(postId)
     postService.findPostById(postId)
     .then((post) => {
       setCurrentPost(post)
@@ -30,14 +30,16 @@ const ForumPost = () => {
   }
 
   const createComment = () => {
-    commentService.createCommentForPost(currentUser, newComment)
+    commentService.createCommentForPost(postId, newComment, currentUser.username)
+    buttonClicks++
+    console.log(buttonClicks)
   }
 
   const findComments = () => {
     commentService.findCommentsForPost(postId)
     .then((Results) => {
       setCommentsForPost(Results);
-    }, [])
+    })
   }
 
   return(
@@ -51,21 +53,24 @@ const ForumPost = () => {
           <h1>{currentPost.title}</h1>
           <p>{currentPost.body}</p>
           <h4>{currentPost.author}</h4>
-          {/*<div className="recent-posts">*/}
-          {/*  <ul className="list-group">*/}
-          {/*    {*/}
-          {/*      recentPosts.map((post) => {*/}
-          {/*        return(*/}
-          {/*            <li className="list-group-item">*/}
-          {/*              {post.title}*/}
-          {/*              {post.body}*/}
-          {/*              {post.author}*/}
-          {/*            </li>*/}
-          {/*        )*/}
-          {/*      })*/}
-          {/*    }*/}
-          {/*  </ul>*/}
-          {/*</div>*/}
+          <div className="post-comments">
+            <div className="comment-header">
+              <h3>Post Comments:</h3>
+            </div>
+            <ul className="list-group-comments">
+              {
+                commentsForPost.map((post) => {
+                  return(
+                      <li className="list-group-item-comments">
+                        {post.body}<br/>
+                        On {post.postDate} By:
+                        {post.author}
+                      </li>
+                  )
+                })
+              }
+            </ul>
+          </div>
           <div className="form-group">
             <label htmlFor="commentInput">Comment:</label>
             <textarea

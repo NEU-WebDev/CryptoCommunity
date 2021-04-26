@@ -7,6 +7,8 @@ import "../../styles/profile-page.css";
 const Profile = () => {
   const [currentUser, setCurrentUser] = useState({username: '', password: ''})
   const [updatedUserName, setUpdatedUserName] = useState({username: ''})
+  const [updatedPassword, setUpdatedPassword] = useState({password: ''})
+
   useEffect(() => {
     userService.profile()
     .then((currentUser) => {
@@ -14,6 +16,7 @@ const Profile = () => {
     })
   }, [])
   const history = useHistory()
+
   const logout = () => {
     userService.logout();
     history.push("/")
@@ -24,7 +27,7 @@ const Profile = () => {
       ...currentUser,
       username: updatedUserName
     }
-    userService.updateUserName(newUser)
+    userService.updateUserName(newUser, currentUser.username)
     userService.logout();
     history.push("/")
   }
@@ -43,7 +46,7 @@ const Profile = () => {
             onChange={(event) => setUpdatedUserName(event.target.value)}/>
         <input
             placeholder="New Password"
-            onChange={(event) => setUpdatedUserName(event.target.value)}/>
+            onChange={(event) => setUpdatedPassword(event.target.value)}/>
         <button
             onClick={updateUserName}
             className="btn btn-primary">
