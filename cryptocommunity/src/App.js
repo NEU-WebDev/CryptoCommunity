@@ -9,6 +9,7 @@ import Login from "./components/users/login";
 import Register from "./components/users/register";
 import Profile from "./components/users/profile";
 import ForumScreen from "./components/forum-screen/forum-home"
+import ForumPost from "./components/forum-screen/forum-post";
 
 function App() {
   return (
@@ -37,6 +38,9 @@ function App() {
           </Route>
           <Route path="/forum" exact={true}>
             <ForumScreen/>
+          </Route>
+          <Route path="/forum/post/{postId}" exact={true}>
+            <ForumPost/>
           </Route>
         </BrowserRouter>
       </div>
