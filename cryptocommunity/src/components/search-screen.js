@@ -56,7 +56,7 @@ const SearchScreen = (
             results.rates.map((coinRate) =>{
               return(
                 <li className="list-group-item">
-                  <Link to={`/exchangerate/${title}/${coinRate.asset_id_quote}`}>
+                  <Link className="search-results" to={`/exchangerate/${title}/${coinRate.asset_id_quote}`}>
                     1 {results.asset_id_base} is Worth: {coinRate.rate} {coinRate.asset_id_quote}
                   </Link>
                 </li>
@@ -64,6 +64,11 @@ const SearchScreen = (
             })
           }
         </ul>
+        <div className="footer">
+          <a href="https://www.privacypolicies.com/live/a9ccc0fc-fdec-4404-a260-4f009950b239">Privacy Policy</a>
+          <p>Vincent Luo & Richard A. Castaneda <br/>
+            Northeastern University CS5610</p>
+        </div>
       </div>
   )
 }

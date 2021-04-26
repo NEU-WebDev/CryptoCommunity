@@ -3,6 +3,7 @@ import {Link, useHistory} from 'react-router-dom'
 import userService from '../../services/user-service'
 import postService from '../../services/post-service'
 import commentService from '../../services/comment-service'
+import coinService from '../../services/coin-service'
 import NavBar from "../navbar";
 import "../../styles/profile-page.css";
 
@@ -12,6 +13,7 @@ const Profile = () => {
   const [updatedPassword, setUpdatedPassword] = useState({password: ''})
   const [postsForUser, setPostsForUser] = useState([])
   const [commentsForUser, setCommentsForUser] = useState([])
+  const [coinsForUser, setCoinsForUser] = useState([])
   let username = "";
 
   useEffect(() => {
@@ -46,8 +48,11 @@ const Profile = () => {
     })
     commentService.findCommentsForUser(username)
     .then((comments) => {
-      console.log(comments)
       setCommentsForUser(comments)
+    })
+    coinService.findCoinsForUser(username)
+    .then((coins) => {
+      setCoinsForUser(coins)
     })
   }
 
@@ -87,13 +92,25 @@ const Profile = () => {
         }
         </div>
         <br/>
-        <div className="profile-user-posts">
+        <div className="profile-user-comments">
           <h4>My Comments:</h4>
           {
             commentsForUser.map((comment) => {
               return(
                   <li className="list-group-item-post">
                     <Link to={`/forum/post/${comment.associatedPost}`} className="navbar-brand">{comment.body}</Link>
+                  </li>
+              )
+            })
+          }
+        </div>
+        <div className="profile-user-coins">
+          <h4>My Coins:</h4>
+          {
+            coinsForUser.map((coin) => {
+              return(
+                  <li className="list-group-item-post">
+                    <Link to={`/details/${coin.coinName}`} className="navbar-brand">{coin.coinName}</Link>
                   </li>
               )
             })
