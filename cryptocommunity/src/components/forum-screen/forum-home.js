@@ -9,8 +9,14 @@ const ForumScreen = () => {
     findRecentPosts()
   }, [])
 
-  const [recentPosts, setRecentPosts] = useState({recentPosts: []})
+  const [currentUser, setCurrentUser] = useState({username: '', password: ''})
+  const [recentPosts, setRecentPosts] = useState([])
+  const [newPost, setNewPost] = useState({body: ""})
+  const [newTitle, setNewTitle] = useState({title: ""})
 
+  const createPost = () => {
+    postService.createPostForUser(currentUser, newPost)
+  }
 
   const findRecentPosts = () => {
     postService.findRecentPosts()
@@ -28,12 +34,12 @@ const ForumScreen = () => {
           </div>
           <NavBar/>
           <div className="recent-posts">
-            <ul> className="list-group">
+            <ul className="list-group">
               {
                 recentPosts.map((post) => {
                   return(
-                      <li className="list-group-item">
-                        {post.title}
+                      <li className="list-group-item-post">
+                        <Link to={`/forum/post/${post.id}`} className="navbar-brand">{post.title}</Link>
                         {post.body}
                         {post.author}
                       </li>
@@ -42,6 +48,28 @@ const ForumScreen = () => {
               }
             </ul>
           </div>
+          <div className="form-group">
+            <label htmlFor="titleInput">Title:</label>
+            <textarea
+                onChange={(event) => setNewTitle(event.target.value)}
+                className="form-control"
+                id="titleInput"
+                rows="1">
+            </textarea>
+          </div>
+          <div className="form-group">
+            <label htmlFor="bodyInput">Body:</label>
+            <textarea
+                onChange={(event) => setNewPost(event.target.value)}
+                className="form-control"
+                id="bodyInput"
+                rows="3"></textarea>
+          </div>
+          <button
+              onClick={createPost}
+              className="btn btn-success">
+            Create Post
+          </button>
           <div className="footer">
             <a href="https://www.privacypolicies.com/live/a9ccc0fc-fdec-4404-a260-4f009950b239">Privacy Policy</a>
             <p>Vincent Luo & Richard A. Castaneda <br/>

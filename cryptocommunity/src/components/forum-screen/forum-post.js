@@ -1,21 +1,33 @@
 import React, {useState, useEffect} from 'react'
-import {Link} from "react-router-dom";
+import {Link, useHistory, useParams} from "react-router-dom";
 import NavBar from "../navbar.js";
 import postService from "../../services/post-service"
 import commentService from "../../services/comment-service";
 import userService from "../../services/user-service";
 
 const ForumPost = () => {
+  const {postId} = useParams();
   const [currentUser, setCurrentUser] = useState({username: '', password: ''})
-  const [commentsForPost, setCommentsForPost] = useState({})
-  const [newComment, setNewComment] = useState({})
+  const [commentsForPost, setCommentsForPost] = useState([])
+  const [newComment, setNewComment] = useState([])
+  const [currentPost, setCurrentPost] = useState([])
 
   useEffect(() => {
     userService.profile()
     .then((currentUser) => {
       setCurrentUser(currentUser)
     })
+    retrievePost()
+    findComments()
   }, [])
+
+  const retrievePost = () => {
+    console.log(postId)
+    postService.findPostById(postId)
+    .then((post) => {
+      setCurrentPost(post)
+    })
+  }
 
   const createComment = () => {
     commentService.createCommentForPost(currentUser, newComment)
@@ -36,22 +48,22 @@ const ForumPost = () => {
             <h4>Engage in Conversation and Learn More About Crypto</h4>
           </div>
           <NavBar/>
-          <h1>PLACEHOLDER: POST DISPLAYED HERE</h1>
-          <div className="recent-posts">
-            <ul className="list-group">
-              {/*{*/}
-              {/*  recentPosts.map((post) => {*/}
-              {/*    return(*/}
-              {/*        <li className="list-group-item">*/}
-              {/*          {post.title}*/}
-              {/*          {post.body}*/}
-              {/*          {post.author}*/}
-              {/*        </li>*/}
-              {/*    )*/}
-              {/*  })*/}
-              {/*}*/}
-            </ul>
-          </div>
+          <h1>{currentPost.title}</h1>
+          {/*<div className="recent-posts">*/}
+          {/*  <ul className="list-group">*/}
+          {/*    {*/}
+          {/*      recentPosts.map((post) => {*/}
+          {/*        return(*/}
+          {/*            <li className="list-group-item">*/}
+          {/*              {post.title}*/}
+          {/*              {post.body}*/}
+          {/*              {post.author}*/}
+          {/*            </li>*/}
+          {/*        )*/}
+          {/*      })*/}
+          {/*    }*/}
+          {/*  </ul>*/}
+          {/*</div>*/}
           <div className="form-group">
             <label htmlFor="commentInput">Comment:</label>
             <textarea
