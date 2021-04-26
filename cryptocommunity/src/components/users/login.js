@@ -7,11 +7,14 @@ import NavBar from "../navbar";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({username: '', password: ''})
+
   const history = useHistory()
+
   const login = () => {
     userService.login(credentials)
     .then((user) => {
-      if(user === 0) {
+      console.log(user);
+      if(user.username === "BadLogin") {
         alert("login failed, try again")
       } else {
         history.push("/profile")
@@ -44,12 +47,12 @@ const Login = () => {
             className="btn btn-primary">
           Login
         </button>
-          <button
-              onClick={login}
-              className="btn btn-primary">
-            Administrator Login
-          </button>
         </nav>
+        <div className="footer">
+          <a href="https://www.privacypolicies.com/live/a9ccc0fc-fdec-4404-a260-4f009950b239">Privacy Policy</a>
+          <p>Vincent Luo & Richard A. Castaneda <br/>
+            Northeastern University CS5610</p>
+        </div>
       </div>
   )
 }

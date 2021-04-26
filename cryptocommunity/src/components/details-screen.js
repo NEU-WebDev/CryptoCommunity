@@ -2,23 +2,41 @@ import React, {useState, useEffect} from 'react'
 import {Link, useHistory, useParams} from "react-router-dom";
 import movieService from "../services/coin-exchange-service"
 import "../styles/details-page.css"
+import NavBar from "./navbar";
+import coinService from "../services/coin-service";
+import userService from "../services/user-service";
 
 const DetailsScreen = () => {
   const date = new Date;
+  const [currentUser, setCurrentUser] = useState({username: '', password: ''})
   const {coinId, currencyId} = useParams();
   const history = useHistory();
   const isCrypto = "";
-  useEffect(() => {
-    findExchanceData()
-  }, [coinId, currencyId])
   const [results, setResults] = useState({searchResults: []})
   const [compareResults, setCompareResults] = useState({compareSearchResults: []})
+  const [usersForCoin, setUsersForCoin] = useState([]);
+
+  useEffect(() => {
+    userService.profile()
+    .then((currentUser) => {
+      setCurrentUser(currentUser)
+      findExchanceData()
+    })
+  }, [])
 
   const findExchanceData = () => {
     movieService.findDetailedCoinData(coinId)
     .then((Results) => {
       setResults(Results[0]);
     }, [])
+    coinService.findUsersForCoin(coinId)
+    .then((coins) => {
+      setUsersForCoin(coins)
+    })
+  }
+
+  const addCoinToUser = () => {
+    coinService.addCoinToUser(currentUser.username, results.asset_id)
   }
 
   const isCryptoText = (cryptoKey) => {
@@ -31,21 +49,15 @@ const DetailsScreen = () => {
 
   return(
       <div>
-          <div className="cryptocommunity-navbar-primary">
-            <nav className="navbar navbar-expand-xl navbar-dark bg-dark">
-              <Link to="/" className="navbar-brand">Home</Link>
-              <Link to="/search" className="navbar-brand">Search</Link>
-              <Link to="/details" className="navbar-brand">Details</Link>
-              <Link to="/Sign-In" className="navbar-brand">Sign-In</Link>
-              <Link to="/register" className="navbar-brand">Sign-Up</Link>
-              <Link to="/privacy" className="navbar-brand">Privacy Policy</Link>
-            </nav>
+        <div>
+         <NavBar/>
           </div>
           <div className="details-welcome">
             <h1>Detailed Currency Page</h1>
             <h6>The information on this page is current as of {date.toDateString()} {date.toTimeString()}</h6>
           </div>
-        <i className="fas fa-cog" onClick={()=>{history.goBack()}}>Back</i>
+        <button className="fas fa-cog" onClick={()=>{history.goBack()}}>Back</button>
+        <button className="fas fa-cog float-right" onClick={()=>{addCoinToUser()}}>Add This Coin To My Profile</button>
         <br/>
         <ul className="list-group">
           <li className="list-group-item">
@@ -70,6 +82,23 @@ const DetailsScreen = () => {
             1 Day Volume (USD): <b>{results.volume_1day_usd}</b>
           </li>
         </ul>
+        <div className="users-who-own-coin">
+          <h3 className="section-heading">Users Who Own This Coin</h3>
+            {
+              usersForCoin.map((user) => {
+                return(
+                    <li className="list-group-item-post">
+                      <Link to={`/profile/${user.userId}`} className="navbar-brand">{user.userId}</Link>
+                    </li>
+                )
+              })
+            }
+        </div>
+        <div className="footer">
+          <a href="https://www.privacypolicies.com/live/a9ccc0fc-fdec-4404-a260-4f009950b239">Privacy Policy</a>
+          <p>Vincent Luo & Richard A. Castaneda <br/>
+            Northeastern University CS5610</p>
+        </div>
       </div>
   )
 }
