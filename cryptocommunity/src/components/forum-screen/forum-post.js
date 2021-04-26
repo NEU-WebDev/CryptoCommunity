@@ -34,7 +34,7 @@ const ForumPost = () => {
   }
 
   const findComments = () => {
-    commentService.findCommentsForPost()
+    commentService.findCommentsForPost(postId)
     .then((Results) => {
       setCommentsForPost(Results);
     }, [])
@@ -49,6 +49,8 @@ const ForumPost = () => {
           </div>
           <NavBar/>
           <h1>{currentPost.title}</h1>
+          <p>{currentPost.body}</p>
+          <h4>{currentPost.author}</h4>
           {/*<div className="recent-posts">*/}
           {/*  <ul className="list-group">*/}
           {/*    {*/}

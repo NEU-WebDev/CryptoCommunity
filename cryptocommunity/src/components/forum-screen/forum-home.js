@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {Link} from "react-router-dom";
 import NavBar from "../navbar.js";
 import postService from "../../services/post-service"
+import userService from "../../services/user-service";
 
 const ForumScreen = () => {
 
@@ -14,8 +15,15 @@ const ForumScreen = () => {
   const [newPost, setNewPost] = useState({body: ""})
   const [newTitle, setNewTitle] = useState({title: ""})
 
+  useEffect(() => {
+    userService.profile()
+    .then((currentUser) => {
+      setCurrentUser(currentUser)
+    })
+  }, [])
+
   const createPost = () => {
-    postService.createPostForUser(currentUser, newPost)
+    postService.createPostForUser(currentUser.username, newPost)
   }
 
   const findRecentPosts = () => {
@@ -27,8 +35,8 @@ const ForumScreen = () => {
 
   return(
       <>
-        <div class="container-fluid">
-          <div class="cryptocommunity-header">
+        <div className="container-fluid">
+          <div className="cryptocommunity-header">
             <h1>CryptoCommunity Forums</h1>
             <h4>Engage in Conversation and Learn More About Crypto</h4>
           </div>
