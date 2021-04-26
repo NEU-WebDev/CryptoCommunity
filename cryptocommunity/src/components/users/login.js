@@ -7,11 +7,14 @@ import NavBar from "../navbar";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({username: '', password: ''})
+
   const history = useHistory()
+
   const login = () => {
     userService.login(credentials)
     .then((user) => {
-      if(user === 0) {
+      console.log(user);
+      if(user.username === "BadLogin") {
         alert("login failed, try again")
       } else {
         history.push("/profile")
@@ -44,11 +47,6 @@ const Login = () => {
             className="btn btn-primary">
           Login
         </button>
-          <button
-              onClick={login}
-              className="btn btn-primary">
-            Administrator Login
-          </button>
         </nav>
       </div>
   )

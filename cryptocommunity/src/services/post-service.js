@@ -29,7 +29,7 @@ export const deletePost = (postId) =>
     .then(response => response.json())
 
 export const findPostsForUser = (userId) =>
-    fetch(`${REMOTE_API}/${userId}/posts/`)
+    fetch(`${REMOTE_API}/users/${userId}/userPosts/`)
     .then(response => response.json())
 
 export const findRecentPosts = () =>
