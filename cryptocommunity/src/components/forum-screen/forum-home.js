@@ -12,8 +12,7 @@ const ForumScreen = () => {
 
   const [currentUser, setCurrentUser] = useState({username: '', password: ''})
   const [recentPosts, setRecentPosts] = useState([])
-  const [newPost, setNewPost] = useState({body: ""})
-  const [newTitle, setNewTitle] = useState({title: ""})
+  const [newPost, setNewPost] = useState({body: "", title: ""})
 
   useEffect(() => {
     userService.profile()
@@ -59,7 +58,7 @@ const ForumScreen = () => {
           <div className="form-group">
             <label htmlFor="titleInput">Title:</label>
             <textarea
-                onChange={(event) => setNewTitle(event.target.value)}
+                onChange={(event) => setNewPost({title: event.target.value})}
                 className="form-control"
                 id="titleInput"
                 rows="1">
@@ -68,7 +67,7 @@ const ForumScreen = () => {
           <div className="form-group">
             <label htmlFor="bodyInput">Body:</label>
             <textarea
-                onChange={(event) => setNewPost(event.target.value)}
+                onChange={(event) => setNewPost({body: event.target.value})}
                 className="form-control"
                 id="bodyInput"
                 rows="3"></textarea>
