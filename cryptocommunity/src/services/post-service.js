@@ -36,11 +36,16 @@ export const findRecentPosts = () =>
     fetch(`${REMOTE_API}/posts`)
     .then(response => response.json())
 
+export const findPostById = (postId) =>
+    fetch(`${REMOTE_API}/getPost/${postId}`)
+    .then(response => response.json())
+
 export default {
   findPostsForUser,
   createPostForUser,
   deletePost,
   updatePostForUser,
-  findRecentPosts
+  findRecentPosts,
+  findPostById
 };
 
