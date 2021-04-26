@@ -14,6 +14,12 @@ const findProfile = (profileId) => {
   }).then(response => response.json())
 }
 
+const checkIfAdmin = (userId) => {
+  return fetch(`${REMOTE_API}/${userId}/admin`, {
+    method: "POST",
+  }).then(response => response.json())
+}
+
 const login = (credentials) => {
   return fetch(`${REMOTE_API}/login`, {
     method: "POST",
@@ -58,5 +64,5 @@ const updateUserName = (newUser, username) => {
 }
 
 export default {
-  register, login, logout, profile, updateUserName
+  register, login, logout, profile, updateUserName, checkIfAdmin
 }

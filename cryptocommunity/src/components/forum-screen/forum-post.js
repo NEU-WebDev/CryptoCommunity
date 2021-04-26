@@ -7,16 +7,24 @@ import userService from "../../services/user-service";
 
 const ForumPost = () => {
   const {postId} = useParams();
-  const [currentUser, setCurrentUser] = useState({username: '', password: ''})
+  const [currentUser, setCurrentUser] = useState({id: '', username: '', password: ''})
   const [commentsForPost, setCommentsForPost] = useState([])
   const [newComment, setNewComment] = useState([])
   const [currentPost, setCurrentPost] = useState([])
+  const [isAdmin, setIsAdmin] = useState(false);
   let buttonClicks = 0;
+
+  const history = useHistory()
 
   useEffect(() => {
     userService.profile()
     .then((currentUser) => {
       setCurrentUser(currentUser)
+      userService.checkIfAdmin(currentUser.id)
+      .then((isAdmin) => {
+        setIsAdmin(isAdmin)
+        console.log(isAdmin)
+      })
     })
     retrievePost()
     findComments()
@@ -30,9 +38,15 @@ const ForumPost = () => {
   }
 
   const createComment = () => {
-    commentService.createCommentForPost(postId, newComment, currentUser.username)
+    commentService.createCommentForPost(postId, newComment,
+        currentUser.username)
     buttonClicks++
     console.log(buttonClicks)
+  }
+
+  const deletePost = () => {
+    postService.deletePost(postId);
+    history.push("/forum")
   }
 
   const findComments = () => {
@@ -42,7 +56,7 @@ const ForumPost = () => {
     })
   }
 
-  return(
+  return (
       <>
         <div className="container-fluid">
           <div className="cryptocommunity-header">
@@ -60,7 +74,7 @@ const ForumPost = () => {
             <ul className="list-group-comments">
               {
                 commentsForPost.map((post) => {
-                  return(
+                  return (
                       <li className="list-group-item-comments">
                         {post.body}<br/>
                         On {post.postDate} By:
@@ -84,8 +98,16 @@ const ForumPost = () => {
               className="btn btn-success">
             Post Comment
           </button>
+          {isAdmin &&
+          <button
+            onClick={deletePost}
+            className="btn btn-danger">
+            Delete Post
+          </button>
+          }
           <div className="footer">
-            <a href="https://www.privacypolicies.com/live/a9ccc0fc-fdec-4404-a260-4f009950b239">Privacy Policy</a>
+            <a href="https://www.privacypolicies.com/live/a9ccc0fc-fdec-4404-a260-4f009950b239">Privacy
+              Policy</a>
             <p>Vincent Luo & Richard A. Castaneda <br/>
               Northeastern University CS5610</p>
           </div>
