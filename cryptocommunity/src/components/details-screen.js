@@ -88,7 +88,7 @@ const DetailsScreen = () => {
               usersForCoin.map((user) => {
                 return(
                     <li className="list-group-item-post">
-                      <Link to={`/details/`} className="navbar-brand">{user.userId}</Link>
+                      <Link to={`/profile/${user.userId}`} className="navbar-brand">{user.userId}</Link>
                     </li>
                 )
               })

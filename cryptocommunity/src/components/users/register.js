@@ -44,6 +44,11 @@ const Register = () => {
           Register
         </button>
         </nav>
+        <div className="footer">
+          <a href="https://www.privacypolicies.com/live/a9ccc0fc-fdec-4404-a260-4f009950b239">Privacy Policy</a>
+          <p>Vincent Luo & Richard A. Castaneda <br/>
+            Northeastern University CS5610</p>
+        </div>
       </div>
   )
 }

@@ -10,6 +10,7 @@ import Register from "./components/users/register";
 import Profile from "./components/users/profile";
 import ForumScreen from "./components/forum-screen/forum-home"
 import ForumPost from "./components/forum-screen/forum-post";
+import UserProfile from "./components/users/user-profile-public"
 
 function App() {
   return (
@@ -41,6 +42,9 @@ function App() {
           </Route>
           <Route path="/forum/post/:postId" exact={true}>
             <ForumPost/>
+          </Route>
+          <Route path="/profile/:username" exact={true}>
+            <UserProfile/>
           </Route>
         </BrowserRouter>
       </div>
