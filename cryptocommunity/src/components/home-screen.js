@@ -8,7 +8,7 @@ import userService from "../services/user-service";
 
 const HomeScreen = () => {
 
-  const [recentPosts, setRecentPosts] = useState([])
+  const [recentPosts, setRecentPosts] = useState(["no posts"])
   const [currentUser, setCurrentUser] = useState({username: '', password: ''})
 
   useEffect(() => {
