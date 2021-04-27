@@ -46,16 +46,16 @@ const ForumScreen = () => {
           <NavBar/>
           <div className="recent-posts">
             <ul className="list-group">
-              {
-                recentPosts.map((post) => {
-                  return(
-                      <li className="list-group-item post-item">
-                        <Link to={`/forum/post/${post.id}`} className="navbar-brand">{post.title}</Link>
-                        By: <Link to={`/profile/${post.author}`} className="navbar-brand">{post.author}</Link>
-                      </li>
-                  )
-                })
-              }
+              {/*{*/}
+              {/*  recentPosts.map((post) => {*/}
+              {/*    return(*/}
+              {/*        <li className="list-group-item post-item">*/}
+              {/*          <Link to={`/forum/post/${post.id}`} className="navbar-brand">{post.title}</Link>*/}
+              {/*          By: <Link to={`/profile/${post.author}`} className="navbar-brand">{post.author}</Link>*/}
+              {/*        </li>*/}
+              {/*    )*/}
+              {/*  })*/}
+              {/*}*/}
             </ul>
           </div>
           <div className="form-group">
