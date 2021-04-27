@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
-import {Link, useHistory} from 'react-router-dom'
-import userService from '../../services/user-service'
+import {Link, useHistory} from 'react-router-dom';
+import userService from '../../services/user-service';
+import "../../index.css";
 import "../../styles/login-page.css";
 import NavBar from "../navbar";
 

@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import userService from '../../services/user-service'
+import "../../index.css";
 import "../../styles/register-page.css";
 import NavBar from "../navbar";
-import "../../styles/register-page.css";
 
 const Register = () => {
   const [credentials, setCredentials] = useState({username: '', password: ''})

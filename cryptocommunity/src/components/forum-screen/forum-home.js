@@ -1,19 +1,21 @@
 import React, {useState, useEffect} from 'react'
 import {Link} from "react-router-dom";
 import NavBar from "../navbar.js";
-import postService from "../../services/post-service"
+import postService from "../../services/post-service";
 import userService from "../../services/user-service";
+import "../../index.css";
 
 const ForumScreen = () => {
-
-  useEffect(() => {
-    findRecentPosts()
-  }, [])
 
   const [currentUser, setCurrentUser] = useState({username: '', password: ''})
   const [recentPosts, setRecentPosts] = useState([])
   const [newPost, setNewPost] = useState({body: '', title: ''})
   const [newTitle, setNewTitle] = useState({title:""})
+  let buttonClick = 0;
+
+  useEffect(() => {
+    findRecentPosts()
+  }, [recentPosts])
 
   useEffect(() => {
     userService.profile()
@@ -24,7 +26,9 @@ const ForumScreen = () => {
 
   const createPost = () => {
     postService.createPostForUser(currentUser.username, newPost)
-    console.log(newPost)
+    document.getElementById("bodyInput").value=("");
+    document.getElementById("titleInput").value=("");
+    buttonClick ++;
   }
 
   const findRecentPosts = () => {
@@ -47,10 +51,9 @@ const ForumScreen = () => {
               {
                 recentPosts.map((post) => {
                   return(
-                      <li className="list-group-item-post">
+                      <li className="list-group-item post-item">
                         <Link to={`/forum/post/${post.id}`} className="navbar-brand">{post.title}</Link>
-                        By:
-                        {post.author}
+                        By: <Link to={`/profile/${post.author}`} className="navbar-brand">{post.author}</Link>
                       </li>
                   )
                 })

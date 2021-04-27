@@ -12,7 +12,17 @@ code {
     monospace;
 }
 
+.post-item{
+  color: slategray;
+}
+
 .footer {
   color: aliceblue;
   text-align: center;
 }
+
+.container-fluid{
+  padding: 10px;
+  background-color: slategray;
+}
+

@@ -4,6 +4,8 @@ import NavBar from "../navbar.js";
 import postService from "../../services/post-service"
 import commentService from "../../services/comment-service";
 import userService from "../../services/user-service";
+import "../../index.css";
+import "../../styles/forums-posts-page.css"
 
 const ForumPost = () => {
   const {postId} = useParams();
@@ -64,29 +66,31 @@ const ForumPost = () => {
             <h4>Engage in Conversation and Learn More About Crypto</h4>
           </div>
           <NavBar/>
-          <h1>{currentPost.title}</h1>
-          <p>{currentPost.body}</p>
-          <h4>{currentPost.author}</h4>
+          <div className="post-content">
+          <h1 className="post-title">{currentPost.title}</h1>
+          <h5 className="post-body">{currentPost.body}</h5>
+          <h4 className="post-author">- {currentPost.author}</h4>
+          </div>
           <div className="post-comments">
             <div className="comment-header">
-              <h3>Post Comments:</h3>
+              <h3 className="comment-header">Comments:</h3>
             </div>
-            <ul className="list-group-comments">
+            <ul className="list-group comments">
               {
                 commentsForPost.map((post) => {
                   return (
-                      <li className="list-group-item-comments">
+                      <li className="list-group-item comments-item">
                         {post.body}<br/>
-                        On {post.postDate} By:
-                        {post.author}
+                        By: {post.author}
                       </li>
                   )
                 })
               }
             </ul>
           </div>
+          <br/>
           <div className="form-group">
-            <label htmlFor="commentInput">Comment:</label>
+            <label className="comment-header" htmlFor="commentInput">Add a Comment:</label>
             <textarea
                 onChange={(event) => setNewComment(event.target.value)}
                 className="form-control"

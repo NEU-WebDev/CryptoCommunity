@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {Link, useParams} from "react-router-dom";
 import movieService from "../services/coin-exchange-service"
+import "../index.css";
 import "../styles/search-page.css";
 import NavBar from "./navbar";
 
