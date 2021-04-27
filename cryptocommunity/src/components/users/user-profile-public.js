@@ -43,6 +43,7 @@ const UserProfile = () => {
 
   const makeAdmin = () => {
     userService.makeAdmin(username)
+    window.location.reload(true)
   }
 
   return (

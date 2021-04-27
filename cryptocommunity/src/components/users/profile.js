@@ -57,85 +57,101 @@ const Profile = () => {
     })
   }
 
-  return(
+  return (
       <div>
         <NavBar/>
-        <div className="register-header">
-          <h1>Profile</h1>
-          <h4>Welcome {currentUser.username}</h4>
-        </div>
-        <p>Change Your Username & Password:</p>
-        <p>*You'll need to login again after changing your username or password*</p>
-        <input
-            placeholder="New Username"
-            onChange={(event) => setUpdatedUserName(event.target.value)}/>
-            <br/>
-        <input
-            placeholder="New Password"
-            onChange={(event) => setUpdatedPassword(event.target.value)}/>
-            <br/>
-        <button
-            onClick={updateUserName}
-            className="btn btn-primary">
-          Update
-        </button>
-        <button
-            onClick={logout}
-            className="btn btn-danger float-right">
-          Logout
-        </button>
-        <br/>
-        <div className="profile-user-posts">
-          <h4>My Posts:</h4>
-          <ul className="list-group">
-        {
-          postsForUser.map((post) => {
-            return(
-                <li className="list-group-item post-item">
-                  <Link to={`/forum/post/${post.id}`} className="navbar-brand">{post.title}</Link>
-                </li>
-            )
-          })
+        {currentUser.username === "" ?
+            <div>
+              Please <Link className="login-link" to="/login">
+              Login
+            </Link> or <Link className="register-link" to="/register">
+              Register
+            </Link>
+            </div> :
+            <div>
+              <div className="profile-header">
+                <h1>Profile</h1>
+                <h4>Welcome {currentUser.username}</h4>
+              </div>
+              <p>Change Your Username & Password:</p>
+              <p>*You'll need to login again after changing your username or
+                password*</p>
+              <input
+                  placeholder="New Username"
+                  onChange={(event) => setUpdatedUserName(event.target.value)}/>
+              <br/>
+              <input
+                  placeholder="New Password"
+                  onChange={(event) => setUpdatedPassword(event.target.value)}/>
+              <br/>
+              <button
+                  onClick={updateUserName}
+                  className="btn btn-primary">
+                Update
+              </button>
+              <button
+                  onClick={logout}
+                  className="btn btn-danger float-right">
+                Logout
+              </button>
+              <br/>
+              <div className="profile-user-posts">
+                <h4>My Posts:</h4>
+                <ul className="list-group">
+                  {
+                    postsForUser.map((post) => {
+                      return (
+                          <li className="list-group-item post-item">
+                            <Link to={`/forum/post/${post.id}`}
+                                  className="navbar-brand">{post.title}</Link>
+                          </li>
+                      )
+                    })
+                  }
+                </ul>
+              </div>
+              <br/>
+              <div className="profile-user-comments">
+                <h4>My Comments:</h4>
+                <ul className="list-group">
+                  {
+                    commentsForUser.map((comment) => {
+                      return (
+                          <li className="list-group-item post-item">
+                            <Link to={`/forum/post/${comment.associatedPost}`}
+                                  className="navbar-brand">{comment.body}</Link>
+                          </li>
+                      )
+                    })
+                  }
+                </ul>
+              </div>
+              <br/>
+              <div className="profile-user-coins">
+                <h4>My Coins:</h4>
+                <ul className="list-group">
+                  {
+                    coinsForUser.map((coin) => {
+                      return (
+                          <li className="list-group-item post-item">
+                            <Link to={`/details/${coin.coinName}`}
+                                  className="navbar-brand">{coin.coinName}</Link>
+                          </li>
+                      )
+                    })
+                  }
+                </ul>
+              </div>
+              <br/>
+              <div className="profile-user-comments"></div>
+              <div className="footer">
+                <a href="https://www.privacypolicies.com/live/a9ccc0fc-fdec-4404-a260-4f009950b239">Privacy
+                  Policy</a>
+                <p>Vincent Luo & Richard A. Castaneda <br/>
+                  Northeastern University CS5610</p>
+              </div>
+            </div>
         }
-        </ul>
-        </div>
-        <br/>
-        <div className="profile-user-comments">
-          <h4>My Comments:</h4>
-          <ul className="list-group">
-          {
-            commentsForUser.map((comment) => {
-              return(
-                  <li className="list-group-item post-item">
-                    <Link to={`/forum/post/${comment.associatedPost}`} className="navbar-brand">{comment.body}</Link>
-                  </li>
-              )
-            })
-          }
-        </ul>
-        </div>
-        <br/>
-        <div className="profile-user-coins">
-          <h4>My Coins:</h4>
-          <ul className="list-group">
-          {
-            coinsForUser.map((coin) => {
-              return(
-                  <li className="list-group-item post-item">
-                    <Link to={`/details/${coin.coinName}`} className="navbar-brand">{coin.coinName}</Link>
-                  </li>
-              )
-            })
-          }
-          </ul>
-        </div>
-        <br/>
-        <div className="profile-user-comments"></div>
-        <div className="footer">
-          <a href="https://www.privacypolicies.com/live/a9ccc0fc-fdec-4404-a260-4f009950b239">Privacy Policy</a>
-          <p>Vincent Luo & Richard A. Castaneda <br/>
-            Northeastern University CS5610</p>
-        </div>
       </div>
   )
 }

@@ -39,9 +39,12 @@ const ForumPost = () => {
   }
 
   const createComment = () => {
-    commentService.createCommentForPost(postId, newComment, currentUser.username)
-    document.getElementById("commentInput").value=("");
-
+    if (currentUser.username === '') {
+      alert("You must register or login to comment")
+    } else {
+      commentService.createCommentForPost(postId, newComment, currentUser.username)
+      document.getElementById("commentInput").value=("");
+    }
   }
 
   const deletePost = () => {

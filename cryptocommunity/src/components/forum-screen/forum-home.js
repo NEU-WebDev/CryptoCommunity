@@ -24,9 +24,13 @@ const ForumScreen = () => {
   }, [])
 
   const createPost = () => {
-    postService.createPostForUser(currentUser.username, newPost)
-    document.getElementById("bodyInput").value=("");
-    document.getElementById("titleInput").value=("");
+    if (currentUser.username === '') {
+      alert("You must register or login to post")
+    } else {
+      postService.createPostForUser(currentUser.username, newPost)
+      document.getElementById("bodyInput").value=("");
+      document.getElementById("titleInput").value=("");
+    }
   }
 
   const findRecentPosts = () => {
