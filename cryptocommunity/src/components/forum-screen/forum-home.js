@@ -11,10 +11,11 @@ const ForumScreen = () => {
   const [recentPosts, setRecentPosts] = useState([])
   const [newPost, setNewPost] = useState({body: '', title: ''})
   const [newTitle, setNewTitle] = useState({title:""})
+  let buttonClick = 0;
 
   useEffect(() => {
     findRecentPosts()
-  }, [recentPosts])
+  }, [buttonClick])
 
   useEffect(() => {
     userService.profile()
@@ -28,6 +29,7 @@ const ForumScreen = () => {
       alert("You must register or login to post")
     } else {
       postService.createPostForUser(currentUser.username, newPost)
+      buttonClick++;
       document.getElementById("bodyInput").value=("");
       document.getElementById("titleInput").value=("");
     }
@@ -37,7 +39,7 @@ const ForumScreen = () => {
     postService.findRecentPosts()
     .then((Results) => {
       setRecentPosts(Results);
-    }, [])
+    })
   }
 
   return(

@@ -24,7 +24,6 @@ const ForumPost = () => {
       userService.checkIfAdmin(currentUser.username)
       .then((isAdmin) => {
         setIsAdmin(isAdmin)
-        console.log(isAdmin)
       })
     })
     retrievePost()
