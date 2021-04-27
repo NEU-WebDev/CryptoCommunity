@@ -21,7 +21,7 @@ const ForumPost = () => {
     userService.profile()
     .then((currentUser) => {
       setCurrentUser(currentUser)
-      userService.checkIfAdmin(currentUser.id)
+      userService.checkIfAdmin(currentUser.username)
       .then((isAdmin) => {
         setIsAdmin(isAdmin)
         console.log(isAdmin)
