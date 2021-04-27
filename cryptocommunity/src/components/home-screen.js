@@ -26,6 +26,7 @@ const HomeScreen = () => {
     postService.findRecentPosts()
     .then((Results) => {
       setRecentPosts(Results);
+      console.log(recentPosts)
     }, [])
   }
 
@@ -43,16 +44,16 @@ const HomeScreen = () => {
           <div className="recent-posts">
          <h4>Recent Posts & Articles</h4>
             <ul className="list-group">
-            {
-              recentPosts.map((post) => {
-                return(
-                    <li className="list-group-item-post">
-                    <Link to={`/forum/post/${post.id}`} className="post-link"><b>{post.title}</b></Link> Posted By:
-                      <Link to={`/profile/${post.author}`} className="post-link">{post.author}</Link>
-                    </li>
-                )
-              })
-            }
+            {/*{*/}
+            {/*  recentPosts.map((post) => {*/}
+            {/*    return(*/}
+            {/*        <li className="list-group-item-post">*/}
+            {/*        <Link to={`/forum/post/${post.id}`} className="post-link"><b>{post.title}</b></Link> Posted By:*/}
+            {/*          <Link to={`/profile/${post.author}`} className="post-link">{post.author}</Link>*/}
+            {/*        </li>*/}
+            {/*    )*/}
+            {/*  })*/}
+            {/*}*/}
             </ul>
           </div>
           <br/>
