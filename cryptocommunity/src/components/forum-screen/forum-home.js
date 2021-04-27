@@ -15,7 +15,7 @@ const ForumScreen = () => {
 
   useEffect(() => {
     findRecentPosts()
-  }, [recentPosts])
+  }, [createPost()])
 
   useEffect(() => {
     userService.profile()
