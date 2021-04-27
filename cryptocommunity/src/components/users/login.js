@@ -14,13 +14,14 @@ const Login = () => {
   const login = () => {
     userService.login(credentials)
     .then((user) => {
-      console.log(user);
       if(user.username === "BadLogin") {
         alert("login failed, try again")
       } else {
         history.push("/profile")
       }
     })
+    document.getElementById("usernameInput").value=("");
+    document.getElementById("passwordInput").value=("");
   }
 
   return(
@@ -36,11 +37,14 @@ const Login = () => {
             placeholder={credentials.username}
             onChange={(e) => {setCredentials({...credentials, username: e.target.value})}}
             className="form-control"
+            id="usernameInput"
             placeholder="Username"/>
         <input
+            type="password"
             placeholder={credentials.password}
             onChange={(e) => {setCredentials({...credentials, password: e.target.value})}}
             className="form-control"
+            id="passwordInput"
             placeholder="Password"/>
         <nav className="navbar navbar-dark bg-dark">
         <button

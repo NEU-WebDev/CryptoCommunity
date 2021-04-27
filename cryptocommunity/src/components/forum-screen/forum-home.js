@@ -11,7 +11,6 @@ const ForumScreen = () => {
   const [recentPosts, setRecentPosts] = useState([])
   const [newPost, setNewPost] = useState({body: '', title: ''})
   const [newTitle, setNewTitle] = useState({title:""})
-  let buttonClick = 0;
 
   useEffect(() => {
     findRecentPosts()
@@ -28,7 +27,6 @@ const ForumScreen = () => {
     postService.createPostForUser(currentUser.username, newPost)
     document.getElementById("bodyInput").value=("");
     document.getElementById("titleInput").value=("");
-    buttonClick ++;
   }
 
   const findRecentPosts = () => {
