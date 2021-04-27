@@ -29,7 +29,7 @@ const ForumScreen = () => {
       alert("You must register or login to post")
     } else {
       postService.createPostForUser(currentUser.username, newPost)
-      buttonClick++;
+      findRecentPosts()
       document.getElementById("bodyInput").value=("");
       document.getElementById("titleInput").value=("");
     }
