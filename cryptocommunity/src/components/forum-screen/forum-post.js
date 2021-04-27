@@ -6,6 +6,7 @@ import commentService from "../../services/comment-service";
 import userService from "../../services/user-service";
 import "../../index.css";
 import "../../styles/forums-posts-page.css"
+import {useCallback} from "react/cjs/react.production.min";
 
 const ForumPost = () => {
   const {postId} = useParams();

@@ -15,7 +15,7 @@ const ForumScreen = () => {
 
   useEffect(() => {
     findRecentPosts()
-  }, [setRecentPosts])
+  }, [recentPosts, buttonClick])
 
   useEffect(() => {
     userService.profile()
@@ -25,6 +25,7 @@ const ForumScreen = () => {
   }, [])
 
   const createPost = () => {
+    buttonClick++;
     if (currentUser.username === '') {
       alert("You must register or login to post")
     } else {
