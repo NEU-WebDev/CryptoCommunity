@@ -14,9 +14,9 @@ const SearchScreen = (
   const [results, setResults] = useState({rates: []})
   const [searchTitle, setSearchTitle] = useState(title)
   const [cachedItem, setCachedItem] = useState({})
-  // useEffect( () => {
-  //   findPriceByCoin()
-  // },[searchTitle])
+  useEffect( () => {
+    findPriceByCoin()
+  },[searchTitle])
   const findPriceByCoin = () => {
     movieService.findExchangeRateByCoin(title)
     .then((results) => {
