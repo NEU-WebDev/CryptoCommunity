@@ -14,7 +14,6 @@ const ForumPost = () => {
   const [newComment, setNewComment] = useState([])
   const [currentPost, setCurrentPost] = useState([])
   const [isAdmin, setIsAdmin] = useState(false);
-  let buttonClicks = 0;
 
   const history = useHistory()
 
@@ -30,7 +29,7 @@ const ForumPost = () => {
     })
     retrievePost()
     findComments()
-  }, [buttonClicks])
+  }, [commentsForPost])
 
   const retrievePost = () => {
     postService.findPostById(postId)
@@ -40,10 +39,9 @@ const ForumPost = () => {
   }
 
   const createComment = () => {
-    commentService.createCommentForPost(postId, newComment,
-        currentUser.username)
-    buttonClicks++
-    console.log(buttonClicks)
+    commentService.createCommentForPost(postId, newComment, currentUser.username)
+    document.getElementById("commentInput").value=("");
+
   }
 
   const deletePost = () => {
@@ -77,11 +75,11 @@ const ForumPost = () => {
             </div>
             <ul className="list-group comments">
               {
-                commentsForPost.map((post) => {
+                commentsForPost.map((comment) => {
                   return (
                       <li className="list-group-item comments-item">
-                        {post.body}<br/>
-                        By: {post.author}
+                        {comment.body}<br/>
+                        By: {comment.author}
                       </li>
                   )
                 })
