@@ -23,7 +23,7 @@ const DetailsScreen = () => {
       setCurrentUser(currentUser)
       findExchanceData()
     })
-  }, [])
+  }, [usersForCoin])
 
   const findExchanceData = () => {
     movieService.findDetailedCoinData(coinId)
