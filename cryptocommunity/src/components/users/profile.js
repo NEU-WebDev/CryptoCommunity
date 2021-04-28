@@ -43,10 +43,6 @@ const Profile = () => {
   // }
 
   const updateUserName = () => {
-    const newUser = {
-      ...currentUser,
-      username: updatedUserName
-    }
     userService.updateUserName(updatedUserName, currentUser.username)
     userService.logout();
     history.push("/login")
