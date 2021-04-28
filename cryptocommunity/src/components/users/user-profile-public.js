@@ -12,17 +12,28 @@ const UserProfile = () => {
   const [postsForUser, setPostsForUser] = useState([])
   const [commentsForUser, setCommentsForUser] = useState([])
   const [coinsForUser, setCoinsForUser] = useState([])
+  const [currentUser, setCurrentUser] = useState({id: '', username: '', password: ''})
   const {username} = useParams();
   const [isAdmin, setIsAdmin] = useState(false);
+  const [currentUserIsAdmin, setCurrentUserIsAdmin] = useState(false);
+
 
   useEffect(() => {
     findUserContent(username)
+    userService.profile()
+    .then((currentUser) => {
+      setCurrentUser(currentUser);
+      userService.checkIfAdmin(currentUser.username)
+      .then((currentUserIsAdmin) => {
+        setCurrentUserIsAdmin(currentUserIsAdmin);
+      })
+    })
     userService.checkIfAdmin(username)
     .then((isAdmin) => {
       setIsAdmin(isAdmin)
       console.log(isAdmin)
     })
-  }, [username])
+  }, [isAdmin])
 
   const history = useHistory()
 
@@ -99,7 +110,7 @@ const UserProfile = () => {
           </ul>
         </div>
         <br></br>
-        {!isAdmin &&
+        {!isAdmin && currentUserIsAdmin &&
         <button
             onClick={makeAdmin}
             className="btn btn-success">
