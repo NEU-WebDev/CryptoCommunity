@@ -38,8 +38,8 @@ const DetailsScreen = () => {
   }
 
   const addCoinToUser = () => {
-    setNeedsUpdate(true);
     coinService.addCoinToUser(currentUser.username, results.asset_id)
+    setNeedsUpdate(true);
     setNeedsUpdate(false);
   }
 
