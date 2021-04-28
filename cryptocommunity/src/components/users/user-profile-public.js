@@ -21,7 +21,6 @@ const UserProfile = () => {
     userService.checkIfAdmin(username)
     .then((isAdmin) => {
       setIsAdmin(isAdmin)
-      console.log(isAdmin)
     })
   }, [needsUpdate])
 
@@ -103,12 +102,13 @@ const UserProfile = () => {
           </ul>
         </div>
         <br></br>
-        {!isAdmin &&
-        <button
-            onClick={makeAdmin}
-            className="btn btn-success">
-          Make Admin
-        </button>
+        {
+          isAdmin ? true :
+            <button
+                onClick={makeAdmin}
+                className="btn btn-success">
+              Make Admin
+            </button>
         }
         <div className="profile-user-comments"></div>
         <div className="footer">
