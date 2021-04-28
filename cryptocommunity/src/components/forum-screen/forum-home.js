@@ -7,14 +7,15 @@ import "../../index.css";
 
 const ForumScreen = () => {
 
-  const [currentUser, setCurrentUser] = useState({username: '', password: ''})
-  const [recentPosts, setRecentPosts] = useState([])
-  const [newPost, setNewPost] = useState({body: '', title: ''})
-  const [newTitle, setNewTitle] = useState({title:""})
+  const [currentUser, setCurrentUser] = useState({username: '', password: ''});
+  const [recentPosts, setRecentPosts] = useState([]);
+  const [newPost, setNewPost] = useState({body: '', title: ''});
+  const [newTitle, setNewTitle] = useState({title:""});
+  const [needsUpdate, setNeedsUpdate] = useState(false);
 
   useEffect(() => {
     findRecentPosts()
-  }, [recentPosts])
+  }, [needsUpdate])
 
   useEffect(() => {
     userService.profile()
@@ -30,7 +31,9 @@ const ForumScreen = () => {
       postService.createPostForUser(currentUser.username, newPost)
       document.getElementById("bodyInput").value=("");
       document.getElementById("titleInput").value=("");
+      setNeedsUpdate(true);
     }
+    setNeedsUpdate(false);
   }
 
   const findRecentPosts = () => {

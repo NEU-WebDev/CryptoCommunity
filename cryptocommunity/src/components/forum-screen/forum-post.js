@@ -15,6 +15,7 @@ const ForumPost = () => {
   const [newComment, setNewComment] = useState([])
   const [currentPost, setCurrentPost] = useState([])
   const [isAdmin, setIsAdmin] = useState(false);
+  const [needsUpdate, setNeedsUpdate] = useState(false);
 
   const history = useHistory()
 
@@ -29,7 +30,7 @@ const ForumPost = () => {
     })
     retrievePost()
     findComments()
-  }, [commentsForPost])
+  }, [needsUpdate])
 
   const retrievePost = () => {
     postService.findPostById(postId)
@@ -44,7 +45,9 @@ const ForumPost = () => {
     } else {
       commentService.createCommentForPost(postId, newComment, currentUser.username)
       document.getElementById("commentInput").value=("");
+      setNeedsUpdate(true);
     }
+    setNeedsUpdate(false);
   }
 
   const deletePost = () => {
