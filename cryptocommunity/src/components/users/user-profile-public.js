@@ -12,7 +12,6 @@ const UserProfile = () => {
   const [postsForUser, setPostsForUser] = useState([])
   const [commentsForUser, setCommentsForUser] = useState([])
   const [coinsForUser, setCoinsForUser] = useState([])
-  const {username} = useParams();
   const [isAdmin, setIsAdmin] = useState(false);
   const [isCurrentUserAdmin, setIsCurrentUserAdmin] = useState(false);
   const [needsUpdate, setNeedsUpdate] = useState(false);
@@ -31,6 +30,7 @@ const UserProfile = () => {
     })
   }, [])
 
+  const {username} = useParams();
   useEffect(() => {
     findUserContent(username)
     userService.checkIfAdmin(username)
