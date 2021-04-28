@@ -14,7 +14,7 @@ const UserProfile = () => {
   const [coinsForUser, setCoinsForUser] = useState([])
   const {username} = useParams();
   const [isAdmin, setIsAdmin] = useState(false);
-  const [isCurrenntUserAdmin, setIsCurrentUserAdmin] = useState(false);
+  const [isCurrentUserAdmin, setIsCurrentUserAdmin] = useState(false);
   const [needsUpdate, setNeedsUpdate] = useState(false);
   const [currentUser, setCurrentUser] = useState({username: '', password: ''})
 
@@ -118,7 +118,7 @@ const UserProfile = () => {
         </div>
         <br></br>
         {
-          isCurrenntUserAdmin && isAdmin ? true :
+          isCurrentUserAdmin ? true :
               <button
                   onClick={makeAdmin}
                   className="btn btn-success">
