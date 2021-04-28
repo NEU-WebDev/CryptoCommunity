@@ -56,14 +56,9 @@ const logout = () => {
   }).then(response => response.json())
 }
 
-const updateUserName = (newUser, username) => {
-  return fetch(`${REMOTE_API}/${username}/updateUsername`, {
+const updateUserName = (newUsername, username) => {
+  return fetch(`${REMOTE_API}/${username}/${newUsername}/updateUsername`, {
     method: "PUT",
-    body: JSON.stringify(newUser),
-    credentials: 'include',
-    headers: {
-      'content-type': 'application/json'
-    }
   })
   .then(response => response.json())
 }
