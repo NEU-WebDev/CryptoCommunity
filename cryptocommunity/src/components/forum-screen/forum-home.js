@@ -28,10 +28,11 @@ const ForumScreen = () => {
     if (currentUser.username === '') {
       alert("You must register or login to post")
     } else {
-      postService.createPostForUser(currentUser.username, newPost)
+      postService.createPostForUser(currentUser.username, newPost).then((results) => {
+        setNeedsUpdate(true);
+      })
       document.getElementById("bodyInput").value=("");
       document.getElementById("titleInput").value=("");
-      setNeedsUpdate(true);
     }
     setNeedsUpdate(false);
   }

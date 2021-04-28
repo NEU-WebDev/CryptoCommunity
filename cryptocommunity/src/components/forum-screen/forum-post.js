@@ -44,8 +44,10 @@ const ForumPost = () => {
       alert("You must register or login to comment")
     } else {
       commentService.createCommentForPost(postId, newComment, currentUser.username)
+      .then((result => {
+        setNeedsUpdate(true);
+      }))
       document.getElementById("commentInput").value=("");
-      setNeedsUpdate(true);
     }
     setNeedsUpdate(false);
   }
