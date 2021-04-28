@@ -118,13 +118,13 @@ const UserProfile = () => {
         </div>
         <br></br>
         {
-          isAdmin ? true :
-              isCurrenntUserAdmin ? true :
-            <button
-                onClick={makeAdmin}
-                className="btn btn-success">
-              Make Admin
-            </button>
+          isCurrenntUserAdmin ? true :
+            isAdmin ? true :
+              <button
+                  onClick={makeAdmin}
+                  className="btn btn-success">
+                Make Admin
+              </button>
         }
         <div className="profile-user-comments"></div>
         <div className="footer">
