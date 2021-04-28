@@ -14,6 +14,7 @@ const UserProfile = () => {
   const [coinsForUser, setCoinsForUser] = useState([])
   const {username} = useParams();
   const [isAdmin, setIsAdmin] = useState(false);
+  const [needsUpdate, setNeedsUpdate] = useState(false);
 
   useEffect(() => {
     findUserContent(username)
@@ -22,7 +23,7 @@ const UserProfile = () => {
       setIsAdmin(isAdmin)
       console.log(isAdmin)
     })
-  }, [username])
+  }, [needsUpdate])
 
   const history = useHistory()
 
@@ -43,7 +44,10 @@ const UserProfile = () => {
 
   const makeAdmin = () => {
     userService.makeAdmin(username)
-    window.location.reload(true)
+    .then((results) => {
+      setNeedsUpdate(true);
+    })
+    setNeedsUpdate(false);
   }
 
   return (
