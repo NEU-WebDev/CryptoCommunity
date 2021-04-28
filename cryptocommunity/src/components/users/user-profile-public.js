@@ -117,8 +117,8 @@ const UserProfile = () => {
           </ul>
         </div>
         <br></br>
-        {
-          isCurrentUserAdmin ? true :
+        {isCurrentUserAdmin &&
+            isAdmin &&
               <button
                   onClick={makeAdmin}
                   className="btn btn-success">
