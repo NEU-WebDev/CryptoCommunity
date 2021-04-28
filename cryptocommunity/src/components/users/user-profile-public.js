@@ -16,6 +16,7 @@ const UserProfile = () => {
   const {username} = useParams();
   const [isAdmin, setIsAdmin] = useState(false);
   const [isCurrentUserAdmin, setIsCurrentUserAdmin] = useState(false);
+  const [needsUpdate, setNeedsUpdate] = useState(false);
 
 
   useEffect(() => {
@@ -32,7 +33,7 @@ const UserProfile = () => {
     .then((isAdmin) => {
       setIsAdmin(isAdmin)
     })
-  }, [isAdmin])
+  }, [needsUpdate])
 
   const history = useHistory()
 
@@ -52,8 +53,11 @@ const UserProfile = () => {
   }
 
   const makeAdmin = () => {
-    userService.makeAdmin(username)
-    window.location.reload(true)
+    userService.makeAdmin(username).then((result) => {
+      setNeedsUpdate(true);
+    })
+    setNeedsUpdate(false);
+    //window.location.reload(true)
   }
 
   return (
