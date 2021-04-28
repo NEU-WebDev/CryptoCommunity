@@ -117,7 +117,7 @@ const UserProfile = () => {
           </ul>
         </div>
         <br></br>
-        {isCurrentUserAdmin &&
+        {
             !isAdmin &&
               <button
                   onClick={makeAdmin}
