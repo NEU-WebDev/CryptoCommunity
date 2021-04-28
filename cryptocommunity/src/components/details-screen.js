@@ -16,6 +16,7 @@ const DetailsScreen = () => {
   const [results, setResults] = useState({searchResults: []})
   const [compareResults, setCompareResults] = useState({compareSearchResults: []})
   const [usersForCoin, setUsersForCoin] = useState([]);
+  const [needsUpdate, setNeedsUpdate] = useState(false);
 
   useEffect(() => {
     userService.profile()
@@ -23,7 +24,7 @@ const DetailsScreen = () => {
       setCurrentUser(currentUser)
       findExchanceData()
     })
-  }, [usersForCoin])
+  }, [needsUpdate])
 
   const findExchanceData = () => {
     movieService.findDetailedCoinData(coinId)
@@ -37,7 +38,9 @@ const DetailsScreen = () => {
   }
 
   const addCoinToUser = () => {
+    setNeedsUpdate(true);
     coinService.addCoinToUser(currentUser.username, results.asset_id)
+    setNeedsUpdate(false);
   }
 
   const isCryptoText = (cryptoKey) => {
