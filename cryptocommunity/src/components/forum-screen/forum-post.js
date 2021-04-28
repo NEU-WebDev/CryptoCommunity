@@ -77,7 +77,7 @@ const ForumPost = () => {
           <div className="post-content">
           <h1 className="post-title">{currentPost.title}</h1>
           <h5 className="post-body">{currentPost.body}</h5>
-          <h4 className="post-author">- {currentPost.author}</h4>
+          <h4 className="post-author">- <Link to={`/profile/${currentPost.author}`} className="navbar-brand">{currentPost.author}</Link></h4>
           </div>
           <div className="post-comments">
             <div className="comment-header">
@@ -89,7 +89,7 @@ const ForumPost = () => {
                   return (
                       <li className="list-group-item comments-item">
                         {comment.body}<br/>
-                        By: {comment.author}
+                        By: <Link to={`/profile/${comment.author}`} className="navbar-brand">{comment.author}</Link>
                       </li>
                   )
                 })
