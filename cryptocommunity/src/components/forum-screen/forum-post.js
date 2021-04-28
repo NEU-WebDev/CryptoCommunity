@@ -52,6 +52,8 @@ const ForumPost = () => {
     setNeedsUpdate(false);
   }
 
+
+  //Needs Update after admin deletes post
   const deletePost = () => {
     postService.deletePost(postId);
     history.push("/forum")
