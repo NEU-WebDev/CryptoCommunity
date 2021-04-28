@@ -22,7 +22,6 @@ const UserProfile = () => {
     userService.profile()
     .then((currentUser) => {
       setCurrentUser(currentUser)
-      findUserContent(currentUser.username)
     })
     userService.checkIfAdmin(currentUser.username)
     .then((isAdmin) => {
@@ -117,7 +116,7 @@ const UserProfile = () => {
           </ul>
         </div>
         <br></br>
-        {
+        {isCurrentUserAdmin &&
             !isAdmin &&
               <button
                   onClick={makeAdmin}
