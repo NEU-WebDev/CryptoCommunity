@@ -14,7 +14,22 @@ const UserProfile = () => {
   const [coinsForUser, setCoinsForUser] = useState([])
   const {username} = useParams();
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isCurrenntUserAdmin, setIsCurrentUserAdmin] = useState(false);
   const [needsUpdate, setNeedsUpdate] = useState(false);
+  const [currentUser, setCurrentUser] = useState({username: '', password: ''})
+
+
+  useEffect(() => {
+    userService.profile()
+    .then((currentUser) => {
+      setCurrentUser(currentUser)
+      findUserContent(currentUser.username)
+    })
+    userService.checkIfAdmin(currentUser.username)
+    .then((isAdmin) => {
+      setIsCurrentUserAdmin(isAdmin)
+    })
+  }, [])
 
   useEffect(() => {
     findUserContent(username)
@@ -104,6 +119,7 @@ const UserProfile = () => {
         <br></br>
         {
           isAdmin ? true :
+              isCurrenntUserAdmin ? true :
             <button
                 onClick={makeAdmin}
                 className="btn btn-success">

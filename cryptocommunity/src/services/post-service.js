@@ -1,4 +1,3 @@
-const USER_API = "https://pure-shore-12573.herokuapp.com/api/users";
 const REMOTE_API = "https://still-reaches-25179.herokuapp.com/api";
 
 export const createPostForUser = (userId, newPost) =>
