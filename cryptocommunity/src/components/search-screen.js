@@ -6,14 +6,14 @@ import "../styles/search-page.css";
 import NavBar from "./navbar";
 
 const SearchScreen = (
-    {
-        searchTerm={title: "Enter AssetID"}
-    }
+    // {
+    //     searchTerm={title: "Enter AssetID"}
+    // }
 ) => {
   const {title, currencyId} = useParams();
   const [results, setResults] = useState({rates: []})
   const [searchTitle, setSearchTitle] = useState(title)
-  const [cachedItem, setCachedItem] = useState(searchTerm)
+  const [cachedItem, setCachedItem] = useState({})
   useEffect( () => {
     findPriceByCoin()
   },[searchTitle])

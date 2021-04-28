@@ -1,5 +1,4 @@
-const USER_API = "https://pure-shore-12573.herokuapp.com/api/users";
-const REMOTE_API = "http://localhost:8080/api/users";
+const REMOTE_API = "https://still-reaches-25179.herokuapp.com/api/users";
 
 const profile = () => {
   return fetch(`${REMOTE_API}/profile`, {
@@ -56,14 +55,9 @@ const logout = () => {
   }).then(response => response.json())
 }
 
-const updateUserName = (newUser, username) => {
-  return fetch(`${REMOTE_API}/${username}/updateUsername`, {
+const updateUserName = (newUsername, username) => {
+  return fetch(`${REMOTE_API}/${username}/${newUsername}/updateUsername`, {
     method: "PUT",
-    body: JSON.stringify(newUser),
-    credentials: 'include',
-    headers: {
-      'content-type': 'application/json'
-    }
   })
   .then(response => response.json())
 }

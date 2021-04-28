@@ -32,14 +32,20 @@ const Profile = () => {
     history.push("/")
   }
 
+  // const updateUserName = () => {
+  //   const newUser = {
+  //     ...currentUser,
+  //     username: updatedUserName
+  //   }
+  //   userService.updateUserName(newUser, currentUser.username)
+  //   userService.logout();
+  //   history.push("/login")
+  // }
+
   const updateUserName = () => {
-    const newUser = {
-      ...currentUser,
-      username: updatedUserName
-    }
-    userService.updateUserName(newUser, currentUser.username)
+    userService.updateUserName(updatedUserName, currentUser.username)
     userService.logout();
-    history.push("/")
+    history.push("/login")
   }
 
   const findUserContent = (username) => {

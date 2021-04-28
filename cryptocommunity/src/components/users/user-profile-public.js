@@ -15,7 +15,7 @@ const UserProfile = () => {
   const [currentUser, setCurrentUser] = useState({id: '', username: '', password: ''})
   const {username} = useParams();
   const [isAdmin, setIsAdmin] = useState(false);
-  const [currentUserIsAdmin, setCurrentUserIsAdmin] = useState(false);
+  const [isCurrentUserAdmin, setIsCurrentUserAdmin] = useState(false);
 
 
   useEffect(() => {
@@ -24,14 +24,13 @@ const UserProfile = () => {
     .then((currentUser) => {
       setCurrentUser(currentUser);
       userService.checkIfAdmin(currentUser.username)
-      .then((currentUserIsAdmin) => {
-        setCurrentUserIsAdmin(currentUserIsAdmin);
+      .then((isCurrentUserAdmin) => {
+        setIsCurrentUserAdmin(isCurrentUserAdmin);
       })
     })
     userService.checkIfAdmin(username)
     .then((isAdmin) => {
       setIsAdmin(isAdmin)
-      console.log(isAdmin)
     })
   }, [isAdmin])
 
@@ -110,7 +109,7 @@ const UserProfile = () => {
           </ul>
         </div>
         <br></br>
-        {!isAdmin && currentUserIsAdmin &&
+        {!isAdmin && isCurrentUserAdmin &&
         <button
             onClick={makeAdmin}
             className="btn btn-success">

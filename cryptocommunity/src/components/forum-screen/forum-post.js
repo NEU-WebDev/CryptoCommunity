@@ -6,6 +6,7 @@ import commentService from "../../services/comment-service";
 import userService from "../../services/user-service";
 import "../../index.css";
 import "../../styles/forums-posts-page.css"
+import {useCallback} from "react/cjs/react.production.min";
 
 const ForumPost = () => {
   const {postId} = useParams();
@@ -14,6 +15,7 @@ const ForumPost = () => {
   const [newComment, setNewComment] = useState([])
   const [currentPost, setCurrentPost] = useState([])
   const [isAdmin, setIsAdmin] = useState(false);
+  const [needsUpdate, setNeedsUpdate] = useState(false);
 
   const history = useHistory()
 
@@ -24,12 +26,11 @@ const ForumPost = () => {
       userService.checkIfAdmin(currentUser.username)
       .then((isAdmin) => {
         setIsAdmin(isAdmin)
-        console.log(isAdmin)
       })
     })
     retrievePost()
     findComments()
-  }, [commentsForPost])
+  }, [needsUpdate])
 
   const retrievePost = () => {
     postService.findPostById(postId)
@@ -43,8 +44,12 @@ const ForumPost = () => {
       alert("You must register or login to comment")
     } else {
       commentService.createCommentForPost(postId, newComment, currentUser.username)
+      .then((result => {
+        setNeedsUpdate(true);
+      }))
       document.getElementById("commentInput").value=("");
     }
+    setNeedsUpdate(false);
   }
 
   const deletePost = () => {

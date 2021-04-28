@@ -7,14 +7,15 @@ import "../../index.css";
 
 const ForumScreen = () => {
 
-  const [currentUser, setCurrentUser] = useState({username: '', password: ''})
-  const [recentPosts, setRecentPosts] = useState([])
-  const [newPost, setNewPost] = useState({body: '', title: ''})
-  const [newTitle, setNewTitle] = useState({title:""})
+  const [currentUser, setCurrentUser] = useState({username: '', password: ''});
+  const [recentPosts, setRecentPosts] = useState([]);
+  const [newPost, setNewPost] = useState({body: '', title: ''});
+  const [newTitle, setNewTitle] = useState({title:""});
+  const [needsUpdate, setNeedsUpdate] = useState(false);
 
   useEffect(() => {
     findRecentPosts()
-  }, [recentPosts])
+  }, [needsUpdate])
 
   useEffect(() => {
     userService.profile()
@@ -27,17 +28,20 @@ const ForumScreen = () => {
     if (currentUser.username === '') {
       alert("You must register or login to post")
     } else {
-      postService.createPostForUser(currentUser.username, newPost)
+      postService.createPostForUser(currentUser.username, newPost).then((results) => {
+        setNeedsUpdate(true);
+      })
       document.getElementById("bodyInput").value=("");
       document.getElementById("titleInput").value=("");
     }
+    setNeedsUpdate(false);
   }
 
   const findRecentPosts = () => {
     postService.findRecentPosts()
     .then((Results) => {
       setRecentPosts(Results);
-    }, [])
+    })
   }
 
   return(

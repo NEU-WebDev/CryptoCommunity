@@ -1,5 +1,4 @@
-const USER_API = "https://pure-shore-12573.herokuapp.com/api/users";
-const REMOTE_API = "http://localhost:8080/api";
+const REMOTE_API = "https://still-reaches-25179.herokuapp.com/api";
 
 export const createPostForUser = (userId, newPost) =>
     fetch(`${REMOTE_API}/users/${userId}/posts`, {
